@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kangstar의 블로그 작성툴</title>
+    <title>Kangstar의 블로그 GPTs</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,9 +14,11 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            font-weight: bold;
+            position: relative;
         }
         .header {
-            background-color: #007BFF;
+            background-color: #99caff;
             color: white;
             width: 100%;
             text-align: center;
@@ -31,6 +33,7 @@
             gap: 20px;
             max-width: 900px;
             width: 90%;
+            z-index: 1;
         }
         .card {
             background-color: white;
@@ -38,35 +41,53 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 20px;
+            align-items: stretch;
+            padding: 0;
+            overflow: hidden;
         }
         .card-title {
             font-weight: bold;
-            margin-bottom: 10px;
             color: #333;
             font-size: 18px;
+            background-color: #e6f2ff;
+            padding: 10px;
+            text-align: center;
         }
         .card-desc {
             color: #777;
             font-size: 14px;
             text-align: center;
-            margin-bottom: 20px;
+            margin: 20px;
         }
         .card-button {
             background-color: #007BFF;
             color: white;
-            padding: 10px 20px;
+            padding: 10px;
             border-radius: 5px;
             text-decoration: none;
             font-size: 14px;
             transition: background-color 0.3s;
+            align-self: center;
+            margin-bottom: 20px;
+            width: 80%;
+            text-align: center;
         }
         .card-button:hover {
             background-color: #0056b3;
         }
         .single-card {
             grid-column: 2;
+        }
+        .background-text {
+            position: absolute;
+            bottom: 10%;
+            width: 100%;
+            text-align: center;
+            font-size: 80px;
+            color: rgba(0,0,0,0.05);
+            pointer-events: none;
+            user-select: none;
+            z-index: 0;
         }
         @media (max-width: 768px) {
             .container {
@@ -79,46 +100,48 @@
     </style>
 </head>
 <body>
-    <div class="header">Kangstar의 블로그 작성툴</div>
+    <div class="header">Kangstar의 블로그 GPTs</div>
 
     <div class="container">
         <div class="card">
-            <div class="card-title">제목 1</div>
-            <div class="card-desc">설명을 여기에 적어주세요.</div>
-            <a href="#" class="card-button">이동하기</a>
+            <div class="card-title">블로그 제목생성(한글)</div>
+            <div class="card-desc">입력한 키워드(한글)를 바탕으로 중요키워드를 추출하여 4주차 28개의 블로그 제목(한글)을 생성합니다.</div>
+            <a href="https://chatgpt.com/g/g-67d8bd09142c8191855de834969f7282-beulrogeu-4juca-jemog-jagseonggi-hangeul-by-kangstar" class="card-button" target="_blank">이동하기</a>
         </div>
         <div class="card">
-            <div class="card-title">제목 2</div>
-            <div class="card-desc">설명을 여기에 적어주세요.</div>
-            <a href="#" class="card-button">이동하기</a>
+            <div class="card-title">블로그 내용작성(한글) - text</div>
+            <div class="card-desc">생성한 제목을 입력하면 제목에 맞는 내용을 웹수집을 통하여 얻은 정보를 바탕으로 블로그 글을 텍스트 형태로 생성합니다.</div>
+            <a href="https://chatgpt.com/g/g-67d8bb8af8e48191b0347f035cadab5a-beulrogeugeul-saengseonggi-text-hangeul-by-kangstar" class="card-button" target="_blank">이동하기</a>
         </div>
         <div class="card">
-            <div class="card-title">제목 3</div>
-            <div class="card-desc">설명을 여기에 적어주세요.</div>
-            <a href="#" class="card-button">이동하기</a>
+            <div class="card-title">블로그 내용작성(한글) - html</div>
+            <div class="card-desc">생성한 제목을 입력하면 제목에 맞는 내용을 웹수집을 통하여 얻은 정보를 바탕으로 블로그 글을 html 형태로 생성합니다.</div>
+            <a href="https://chatgpt.com/g/g-67d8b88b96408191992f56bc1954717c-beulrogeu-geulsaengseonggi-html-hangeul-by-kangstar" class="card-button" target="_blank">이동하기</a>
         </div>
 
         <div class="card">
-            <div class="card-title">제목 4</div>
-            <div class="card-desc">설명을 여기에 적어주세요.</div>
-            <a href="#" class="card-button">이동하기</a>
+            <div class="card-title">블로그 제목생성(영어)</div>
+            <div class="card-desc">입력한 키워드(한글)를 바탕으로 중요키워드를 추출하여 4주차 28개의 블로그 제목(영어)을 생성합니다.</div>
+            <a href="https://chatgpt.com/g/g-67d8c50f3e648191a818636638eb149a-beulrogeu-4juca-jemog-jagseonggi-yeongeo-by-kangstar" class="card-button" target="_blank">이동하기</a>
         </div>
         <div class="card">
-            <div class="card-title">제목 5</div>
-            <div class="card-desc">설명을 여기에 적어주세요.</div>
-            <a href="#" class="card-button">이동하기</a>
+            <div class="card-title">블로그 내용작성(영어) - text</div>
+            <div class="card-desc">생성한 제목을 입력하면 제목에 맞는 내용을 웹수집을 통하여 얻은 정보를 바탕으로 블로그 글을 텍스트 형태로 생성합니다.</div>
+            <a href="https://chatgpt.com/g/g-67d8cc47f3988191b1e739bc21665671-beulrogeugeul-saengseonggi-text-yeongeo-by-kangstar" class="card-button" target="_blank">이동하기</a>
         </div>
         <div class="card">
-            <div class="card-title">제목 6</div>
-            <div class="card-desc">설명을 여기에 적어주세요.</div>
-            <a href="#" class="card-button">이동하기</a>
+            <div class="card-title">블로그 내용작성(영어) - html</div>
+            <div class="card-desc">생성한 제목을 입력하면 제목에 맞는 내용을 웹수집을 통하여 얻은 정보를 바탕으로 블로그 글을 html 형태로 생성합니다.</div>
+            <a href="https://chatgpt.com/g/g-67d8d5d59480819192f493102d6e9966-beulrogeu-geulsaengseonggi-html-yeongeo-by-kangstar" class="card-button" target="_blank">이동하기</a>
         </div>
 
         <div class="card single-card">
-            <div class="card-title">제목 7</div>
-            <div class="card-desc">설명을 여기에 적어주세요.</div>
-            <a href="#" class="card-button">이동하기</a>
+            <div class="card-title">블로그용 이미지 생성기</div>
+            <div class="card-desc">입력한 키워드를 바탕으로 ChatGPT로 간단한 이미지를 생성합니다.</div>
+            <a href="https://chatgpt.com/g/g-67d8d9b9329881918ced51cae6a0a583-beulrogeue-sayongdoel-imiji-saengseonggi" class="card-button" target="_blank">이동하기</a>
         </div>
     </div>
+
+    <div class="background-text">KANGSTAR</div>
 </body>
 </html>
