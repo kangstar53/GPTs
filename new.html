@@ -3,10 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Crypto Casino Hub – Search + Built-in i18n (GeoIP, Multilingual Search)</title>
-  <meta name="description" content="Crypto casino reviews/guides portal – built-in i18n with GeoIP default and multilingual search." />
+
+  <title>Crypto Casino Hub – Search + i18n</title>
+  <meta name="description" content="Crypto casino reviews/guides portal – multilingual UI, GeoIP default, and multilingual search." />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Crypto Casino Hub – Search + i18n">
+  <meta property="og:description" content="Crypto casino reviews/guides portal – multilingual UI, GeoIP default, and multilingual search.">
+  <meta property="og:site_name" content="Crypto Casino Hub">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Crypto Casino Hub – Search + i18n">
+  <meta name="twitter:description" content="Crypto casino reviews/guides portal – multilingual UI, GeoIP default, and multilingual search.">
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --bg:#0b0f14; --card:#111723; --muted:#0e141e; --primary:#47c3ff; --accent:#9cff57;
@@ -15,7 +30,7 @@
     }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0; font-family: Pretendard,system-ui,-apple-system,Segoe UI,Roboto,Arial,Apple SD Gothic Neo,Noto Sans KR,sans-serif; background:var(--bg); color:var(--text)}
+    body{margin:0; font-family: Pretendard,system-ui,-apple-system,Segoe UI,Roboto,Arial,Apple SD Gothic Neo,Noto Sans KR,Noto Sans JP,Noto Sans SC,Noto Sans Arabic,Noto Sans Devanagari,sans-serif; background:var(--bg); color:var(--text)}
     a{color:inherit; text-decoration:none}
     img{max-width:100%; display:block}
     .container{width:min(1200px,100% - 32px); margin-inline:auto}
@@ -87,6 +102,12 @@
     .muted{color:var(--sub)}
     .table .btn{font-size:0.9em; padding:6px 10px}
     .table .btn.primary{font-size:0.9em; padding:6px 10px}
+
+    /* RTL (Arabic) quick adjustments */
+    [dir="rtl"] body, [dir="rtl"] .nav, [dir="rtl"] .section-head { direction: rtl; }
+    [dir="rtl"] .nav { flex-direction: row-reverse; }
+    [dir="rtl"] .cta { margin-right:auto; margin-left:0; }
+    [dir="rtl"] .nav-links { flex-direction: row-reverse; }
   </style>
 </head>
 <body>
@@ -113,10 +134,13 @@
           <label class="hide-mobile" for="langSelect" data-i18n="lang.label">Translate:</label>
           <select id="langSelect" class="select" aria-label="Language">
             <option value="en">English</option>
-            <option value="ja">日本語</option>
-            <option value="ko">한국어</option>
-            <option value="es">Español</option>
             <option value="zh">中文</option>
+            <option value="ko">한국어</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <option value="ja">日本語</option>
+            <option value="hi">हिन्दी</option>
+            <option value="ar">العربية</option>
           </select>
         </div>
       </div>
@@ -139,10 +163,10 @@
           </div>
 
           <div class="pillbar" id="quickTags">
-            <span class="pill" data-tag="btc, ビットコイン, 비트코인, bitcoin, criptomoneda, 比特币"># BTC</span>
-            <span class="pill" data-tag="fast payout, 高速出金, 빠른출금, pago rápido, 快速提款" data-i18n="tags.fast"># Fast Payout</span>
-            <span class="pill" data-tag="no kyc, kycなし, kyc 없음, sin kyc, 无KYC"># No KYC</span>
-            <span class="pill" data-tag="korean, 韓国語, 한국어, coreano, 韩语" data-i18n="tags.korean"># Korean</span>
+            <span class="pill" data-tag="btc, bitcoin, 比特币, 비트코인, bitcoin, bitcoin, बिटकॉइन, بيتكوين"># BTC</span>
+            <span class="pill" data-tag="fast payout, 快速提款, 빠른출금, retrait rapide, pago rápido, 高速出金, तेज़ निकासी, سحب سريع" data-i18n="tags.fast"># Fast Payout</span>
+            <span class="pill" data-tag="no kyc, 无KYC, kyc 없음, sans kyc, sin kyc, kycなし, बिना kyc, بدون تحقق"># No KYC</span>
+            <span class="pill" data-tag="korean support, 韩语支持, 한국어 지원, prise en charge coréenne, soporte coreano, 韓国語対応, कोरियाई समर्थन, دعم الكورية" data-i18n="tags.korean"># Korean</span>
           </div>
 
           <div class="score">
@@ -194,9 +218,9 @@
       </div>
 
       <div class="grid cols-3" id="cards">
-        <!-- 각 카드의 data-tags에 5개 언어 키워드 포함 -->
+        <!-- Cards with multilingual data-tags -->
         <article class="card"
-          data-tags="saturnbet, サターンベット, 새턴벳, saturno apuesta, 土星投注, btc, ビットコイン, 비트코인, bitcoin, criptomoneda, 比特币, fast payout, 高速出金, 빠른출금, pago rápido, 快速提款, no kyc, kycなし, kyc 없음, sin kyc, 无KYC, korean support, 韓国語対応, 한국어 지원, soporte coreano, 韩语支持">
+          data-tags="saturnbet, 土星投注, 새턴벳, saturnbet, saturnbet, सैटर्नबेट, ساتورن بيت, btc, 比特币, 비트코인, bitcoin, bitcoin, बिटकॉइन, بيتكوين, fast payout, 快速提款, 빠른출금, retrait rapide, pago rápido, 高速出金, तेज़ निकासी, سحب سريع, no kyc, 无KYC, kyc 없음, sans kyc, sin kyc, kycなし, बिना kyc, بدون تحقق">
           <a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener" class="thumb-link">
             <div class="thumb"><img src="SaturnBet.jpg" alt="SaturnBet"></div>
           </a>
@@ -208,7 +232,7 @@
         </article>
 
         <article class="card"
-          data-tags="orbitplay, オービットプレイ, 오빗플레이, órbita juego, 轨道玩, btc only, btc限定, 비트코인 전용, solo btc, 仅BTC, no kyc, kycなし, kyc 없음, sin kyc, 无KYC, instant, 即時, 즉시, inmediato, 即时">
+          data-tags="orbitplay, 轨道玩, 오빗플레이, orbitplay, orbitplay, ऑर्बिटप्ले, أوربت بلاي, btc only, 仅BTC, 비트코인 전용, btc uniquement, solo btc, btc限定, केवल btc, فقط بتكوين, instant, 即时, 즉시, immédiat, inmediato, 即時, त्वरित, فوري">
           <a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener" class="thumb-link">
             <div class="thumb"><img src="OrbitPlay.jpg" alt="OrbitPlay"></div>
           </a>
@@ -220,7 +244,7 @@
         </article>
 
         <article class="card"
-          data-tags="nebulawin, ネビュラウィン, 네뷸라윈, nebulosa ganar, 星云赢, eth, イーサリアム, 이더리움, ethereum, 以太坊, usdt, テザー, 테더, tether, 泰达币, new, 新着, 신규, nuevo, 新">
+          data-tags="nebulawin, 星云赢, 네뷸라윈, nebulawin, nebulawin, नेबुलाविन, نيبولا وين, eth, 以太坊, 이더리움, eth, eth, एथेरियम, إيثريوم, usdt, 泰达币, 테더, usdt, usdt, टेदर, تيثر, new, 新, 신규, nouveau, nuevo, 新着, नया, جديد">
           <a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener" class="thumb-link">
             <div class="thumb"><img src="NebulaWin.jpg" alt="NebulaWin"></div>
           </a>
@@ -232,7 +256,7 @@
         </article>
 
         <article class="card"
-          data-tags="lunaluck, ルナルック, 루나럭, luna suerte, 月亮运气, big bonus, 大型ボーナス, 보너스 큼, gran bono, 大奖金, 2 btc, ２ビットコイン, 2 비트코인, 2 btc, 2比特币">
+          data-tags="lunaluck, 月亮运气, 루나럭, lunaluck, lunaluck, लूनालक, لونا لك, big bonus, 大奖金, 보너스 큼, gros bonus, gran bono, 大型ボーナス, बड़ा बोनस, مكافأة كبيرة, 2 btc, 2比特币, 2 비트코인, 2 btc, 2 btc, ２ビットコイン, 2 btc, 2 بتكوين">
           <a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener" class="thumb-link">
             <div class="thumb"><img src="LunaLuck.jpg" alt="LunaLuck"></div>
           </a>
@@ -244,7 +268,7 @@
         </article>
 
         <article class="card"
-          data-tags="cosmospin, コスモスピン, 코스모스핀, cosmo giro, 宇宙转, mobile optimized, モバイル最適化, 모바일 최적, optimizado para móvil, 移动优化, app available, アプリあり, 앱 제공, app disponible, 提供应用">
+          data-tags="cosmospin, 宇宙转, 코스모스핀, cosmospin, cosmospin, कॉसमोस्पिन, كوسمو سبين, mobile optimized, 移动优化, 모바일 최적, optimisé mobile, optimizado para móvil, モバイル最適化, मोबाइल अनुकूलित, مُحسّن للجوال, app available, 提供应用, 앱 제공, appli dispo, app disponible, アプリあり, ऐप उपलब्ध, تطبيق متاح">
           <a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener" class="thumb-link">
             <div class="thumb"><img src="CosmoSpin.jpg" alt="CosmoSpin"></div>
           </a>
@@ -256,7 +280,7 @@
         </article>
 
         <article class="card"
-          data-tags="vegaroll, ベガロール, 베가롤, vega rodar, 维加转, verified, 検証済み, 검증됨, verificado, 已验证, live casino, ライブカジノ, 라이브 카지노, casino en vivo, 真人">
+          data-tags="vegaroll, 维加转, 베가롤, vegaroll, vegaroll, वेगारोल, فيجا رول, verified, 已验证, 검증됨, vérifié, verificado, 検証済み, सत्यापित, موثّق, live casino, 真人, 라이브 카지노, casino en direct, casino en vivo, ライブカジノ, लाइव कसीनो, كازينو مباشر">
           <a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener" class="thumb-link">
             <div class="thumb"><img src="VegaRoll.jpg" alt="VegaRoll"></div>
           </a>
@@ -298,19 +322,19 @@
           </thead>
           <tbody>
             <tr
-              data-tags="saturnbet, サターンベット, 새턴벳, saturno apuesta, 土星投注, btc, ビットコイン, 비트코인, bitcoin, 比特币, optional kyc, 任意k yc, 선택 kyc, kyc opcional, 可选kyc, fast payout, 高速出金, 빠른출금, pago rápido, 快速提款"
+              data-tags="saturnbet, 土星投注, 새턴벳, saturnbet, saturnbet, सैटर्नबेट, ساتورن بيت, optional kyc, 可选kyc, 선택 kyc, kyc optionnel, kyc opcional, kyc任意, वैकल्पिक kyc, كيك واختياري, fast payout, 快速提款, 빠른출금, retrait rapide, pago rápido, 高速出金, तेज़ निकासी, سحب سريع"
               data-withdraw-min="10" data-rating="4.7">
               <td>SaturnBet</td><td>BTC, ETH, USDT</td><td>200% + 100FS</td><td data-i18n="kyc.optional">Optional</td><td>~10 min</td><td>4.7/5</td>
               <td><a class="btn" href="#" data-i18n="btn.visit">Visit Site</a></td>
             </tr>
             <tr
-              data-tags="orbitplay, オービットプレイ, 오빗플레이, órbita juego, 轨道玩, btc only, btc限定, 비트코인 전용, solo btc, 仅BTC, no kyc, kycなし, kyc 없음, sin kyc, 无KYC, instant, 即時, 즉시, inmediato, 即时"
+              data-tags="orbitplay, 轨道玩, 오빗플레이, orbitplay, orbitplay, ऑर्बिटप्ले, أوربت بلاي, btc only, 仅BTC, 비트코인 전용, btc uniquement, solo btc, btc限定, केवल btc, فقط بتكوين, instant, 即时, 즉시, immédiat, inmediato, 即時, त्वरित, فوري"
               data-withdraw-min="0" data-rating="4.5">
               <td>OrbitPlay</td><td>BTC</td><td>1 BTC</td><td data-i18n="kyc.none">None</td><td data-i18n="payout.instant">Instant</td><td>4.5/5</td>
               <td><a class="btn" href="#" data-i18n="btn.visit">Visit Site</a></td>
             </tr>
             <tr
-              data-tags="nebulawin, ネビュラウィン, 네뷸라윈, nebulosa ganar, 星云赢, eth, イーサリアム, 이더리움, ethereum, 以太坊, ltc, ライトコイン, 라이트코인, litecoin, 莱特币, required kyc, kyc必須, kyc 필요, kyc requerido, 需要kyc, 24h, ２４時間, 24시간, 24 horas, 24小时"
+              data-tags="nebulawin, 星云赢, 네뷸라윈, nebulawin, nebulawin, नेबुलाविन, نيبولا وين, required kyc, 需要kyc, kyc 필요, kyc requis, kyc requerido, kyc必須, अनिवार्य kyc, مطلوب تحقق, 24h, 24小时, 24시간, 24 h, 24 horas, ２４時間, 24 घंटे, 24 ساعة"
               data-withdraw-min="1440" data-rating="4.1">
               <td>NebulaWin</td><td>ETH, LTC</td><td>150%</td><td data-i18n="kyc.required">Required</td><td>~24 h</td><td>4.1/5</td>
               <td><a class="btn" href="#" data-i18n="btn.visit">Visit Site</a></td>
@@ -328,7 +352,7 @@
       </div>
       <div class="grid cols-4">
         <article class="card"
-          data-tags="bonus guide, ボーナス ガイド, 보너스 가이드, guía de bonos, 奖金 指南, match bonus, マッチボーナス, 매치 보너스, bono de emparejamiento, 匹配奖金, free spins, フリースピン, 프리 스핀, giros gratis, 免费旋转, wagering, 賭け条件, 베팅 조건, rollover, 打码量">
+          data-tags="bonus guide, 奖金 指南, 보너스 가이드, guide bonus, guía de bonos, ボーナス ガイド, बोनस गाइड, دليل المكافآت, match bonus, 匹配奖金, 매치 보너스, bonus de dépôt, bono de emparejamiento, マッチボーナス, मैच बोनस, مكافأة مطابقة, free spins, 免费旋转, 프리 스핀, tours gratuits, giros gratis, フリースピン, फ्री स्पिन, دورات مجانية, wagering, 打码量, 베팅 조건, exigences de mise, rollover, 賭け条件, रोलओवर, متطلبات الرهان">
           <div class="thumb"></div>
           <div class="body">
             <div class="meta">Guide · Aug 12</div>
@@ -337,7 +361,7 @@
           </div>
         </article>
         <article class="card"
-          data-tags="slot news, スロット ニュース, 슬롯 뉴스, noticias de slots, 老虎机 新闻, rtp, rtp, rtp, rtp, rtp, volatility, ボラティリティ, 변동성, volatilidad, 波动率">
+          data-tags="slot news, 老虎机 新闻, 슬롯 뉴스, actus machines à sous, noticias de slots, スロット ニュース, स्लॉट समाचार, أخبار السلوت, rtp, rtp, rtp, rtp, rtp, volatility, 波动率, 변동성, volatilité, volatilidad, ボラティリティ, अस्थिरता, التقلب">
           <div class="thumb"></div>
           <div class="body">
             <div class="meta">News · Aug 10</div>
@@ -346,7 +370,7 @@
           </div>
         </article>
         <article class="card"
-          data-tags="saturnbet review, サターンベット レビュー, 새턴벳 리뷰, reseña saturnbet, 土星投注 评测, payout, 出金, 출금, pago, 提款">
+          data-tags="saturnbet review, 土星投注 评测, 새턴벳 리뷰, avis saturnbet, reseña saturnbet, サターンベット レビュー, समीक्षा, مراجعة, payout, 提款, 출금, retrait, pago, 出金, भुगतान, السحب">
           <div class="thumb"></div>
           <div class="body">
             <div class="meta">Review · Aug 8</div>
@@ -355,7 +379,7 @@
           </div>
         </article>
         <article class="card"
-          data-tags="rtp compare, RTP 比較, RTP 비교, comparación RTP, RTP 对比, provider, プロバイダ, 제공사, proveedor, 供应商, data, データ, 데이터, datos, 数据">
+          data-tags="rtp compare, RTP 对比, RTP 비교, comparaison RTP, comparación RTP, RTP 比較, आरटीपी तुलना, مقارنة RTP, provider, 供应商, 제공사, fournisseur, proveedor, プロバイダ, प्रदाता, مزود">
           <div class="thumb"></div>
           <div class="body">
             <div class="meta">Insight · Aug 5</div>
@@ -380,19 +404,253 @@
 
   <script>
   (function(){
-    // ===== I18N dictionaries (en is the default text already in DOM) =====
+    // ===== I18N for UI + HEAD META =====
+    // For SEO, dynamic metas are updated client-side. SSR per locale is still best practice.
     const I18N = {
-      en: {'brand.name':'Crypto Casino Hub','nav.guides':'Guides','nav.reviews':'Reviews','nav.bonuses':'Bonuses','nav.news':'News','nav.compare':'Compare','cta.suggest':'Suggest a Site','lang.label':'Translate:','hero.kicker':'Best Crypto Casinos 2025','hero.title':'Honest reviews, fast payouts, and high RTP — all in one place','hero.desc':'Compare crypto-friendly casinos, slots/live games, bonuses, and KYC policies at a glance. All reviews are independently researched.','search.search':'Search','search.clear':'Clear','search.placeholder':'e.g., no kyc, btc bonus, Korean support','tags.fast':'# Fast Payout','tags.korean':'# Korean','hero.badge':'Transparent ad disclosures & review standards','side.hot':'Hot','side.deal':'New: 200% match + 100FS','side.wager':'Up to 1 BTC · 35x wagering','side.guide':'Guide','side.kyc':'Are no-KYC casinos safe?','side.meta':'Security · AML · Anonymity','side.caution':'Caution','side.blacklist':'Delayed payout blacklist','side.complaints':'Recent complaints','sec.top':'Top 6 Recommended Casinos','sec.note':'Search applies to both cards and the comparison table.','badge.editor':'Editor\\'s Pick','badge.rtp':'High RTP','badge.new':'New','badge.bonus':'Big Bonus','badge.mobile':'Mobile Optimized','badge.verified':'Verified','sec.compare':'Quick Compare','sec.sort':'Sort:','sort.default':'Default','sort.rating':'Highest Rating','sort.withdraw':'Fastest Payout','table.site':'Site','table.crypto':'Crypto','table.bonus':'Max Bonus','table.kyc':'KYC','table.payout':'Payout Speed','table.rating':'Rating','kyc.optional':'Optional','kyc.none':'None','kyc.required':'Required','payout.instant':'Instant','btn.visit':'Visit Site','sec.latest':'Latest Guides & News','sec.more':'See more','art.bonus':'Understanding crypto bonuses','art.bonus.desc':'Match bonus, free spins, wagering terms.','art.slot':'New release from a major slot studio','art.slot.desc':'RTP/volatility preview.','art.review':'SaturnBet deep dive','art.review.desc':'KYC, payouts, and bonus experience.','art.rtp':'RTP comparison by provider','art.rtp.desc':'Based on measured data.','foot.copy':'© 2025 Crypto Casino Hub. For informational purposes only; some links may be affiliate.','foot.disclosure':'Ad disclosure','foot.accountability':'Accountability','foot.help':'Gambling help'},
-      ja: {'brand.name':'Crypto Casino Hub','nav.guides':'ガイド','nav.reviews':'レビュー','nav.bonuses':'ボーナス','nav.news':'ニュース','nav.compare':'比較','cta.suggest':'サイトを提案','lang.label':'翻訳:','hero.kicker':'2025年ベスト暗号通貨カジノ','hero.title':'正直なレビュー、迅速な出金、高いRTPを一括比較','hero.desc':'暗号通貨対応カジノ、ゲーム、ボーナス、KYC方針を比較。レビューは独立調査に基づきます。','search.search':'検索','search.clear':'クリア','search.placeholder':'例: no kyc, btc ボーナス, 日本語対応','tags.fast':'# 高速出金','tags.korean':'# 韓国語','hero.badge':'広告開示とレビュー基準を透明化','side.hot':'注目','side.deal':'新規: 200%マッチ + 100FS','side.wager':'最大1 BTC · 35x賭け条件','side.guide':'ガイド','side.kyc':'KYC不要のカジノは安全？','side.meta':'セキュリティ · AML · 匿名性','side.caution':'注意','side.blacklist':'出金遅延ブラックリスト','side.complaints':'最近の苦情','sec.top':'おすすめカジノ TOP6','sec.note':'検索はカードと比較表の両方に適用されます。','badge.editor':'編集部おすすめ','badge.rtp':'高RTP','badge.new':'新着','badge.bonus':'大型ボーナス','badge.mobile':'モバイル最適化','badge.verified':'検証済み','sec.compare':'クイック比較','sec.sort':'並び替え:','sort.default':'デフォルト','sort.rating':'評価が高い順','sort.withdraw':'出金が速い順','table.site':'サイト','table.crypto':'暗号資産','table.bonus':'最大ボーナス','table.kyc':'KYC','table.payout':'出金速度','table.rating':'評価','kyc.optional':'任意','kyc.none':'なし','kyc.required':'必須','payout.instant':'即時','btn.visit':'サイトへ','sec.latest':'最新ガイド & ニュース','sec.more':'もっと見る','art.bonus':'暗号ボーナスの基礎','art.bonus.desc':'マッチ、フリースピン、賭け条件。','art.slot':'大手スタジオの新作','art.slot.desc':'RTP/ボラのプレビュー。','art.review':'SaturnBet 徹底解説','art.review.desc':'KYC/出金/ボーナス体験。','art.rtp':'プロバイダ別RTP比較','art.rtp.desc':'実測データに基づく。','foot.copy':'© 2025 Crypto Casino Hub. 情報提供のみ。アフィリエイトリンクを含む場合があります。','foot.disclosure':'広告開示','foot.accountability':'説明責任','foot.help':'ギャンブル依存対策'},
-      ko: {'brand.name':'Crypto Casino Hub','nav.guides':'가이드','nav.reviews':'리뷰','nav.bonuses':'보너스','nav.news':'뉴스','nav.compare':'비교','cta.suggest':'사이트 제안하기','lang.label':'번역:','hero.kicker':'2025 베스트 암호화폐 카지노','hero.title':'정직한 리뷰 · 빠른 출금 · 높은 RTP를 한눈에','hero.desc':'암호화폐 지원 카지노와 게임, 보너스, KYC 정책을 비교하세요. 모든 리뷰는 독립적으로 조사합니다.','search.search':'검색','search.clear':'지우기','search.placeholder':'예: no kyc, btc 보너스, 한국어 지원','tags.fast':'# 빠른출금','tags.korean':'# 한국어','hero.badge':'광고 표기 및 리뷰 기준 투명','side.hot':'핫딜','side.deal':'신규: 200% 매치 + 100FS','side.wager':'최대 1 BTC · 35x 베팅','side.guide':'가이드','side.kyc':'KYC 없는 카지노, 안전할까?','side.meta':'보안 · AML · 익명성','side.caution':'주의','side.blacklist':'지연 출금 블랙리스트','side.complaints':'최근 민원','sec.top':'추천 카지노 TOP 6','sec.note':'검색은 카드와 비교표에 동시에 적용됩니다.','badge.editor':'에디터 추천','badge.rtp':'높은 RTP','badge.new':'신규','badge.bonus':'보너스 큼','badge.mobile':'모바일 최적','badge.verified':'검증됨','sec.compare':'빠른 비교','sec.sort':'정렬:','sort.default':'기본순','sort.rating':'평점 높은순','sort.withdraw':'출금 빠른순','table.site':'사이트','table.crypto':'암호화폐','table.bonus':'최대 보너스','table.kyc':'KYC','table.payout':'출금속도','table.rating':'평점','kyc.optional':'선택','kyc.none':'없음','kyc.required':'필요','payout.instant':'즉시','btn.visit':'사이트 방문','sec.latest':'최신 가이드 & 뉴스','sec.more':'더 보기','art.bonus':'암호화폐 보너스 이해하기','art.bonus.desc':'매치, 프리스핀, 웨이저링.','art.slot':'대형 슬롯 스튜디오 신작','art.slot.desc':'RTP/변동성 미리 보기.','art.review':'SaturnBet 심층 리뷰','art.review.desc':'KYC/출금/보너스 체험담.','art.rtp':'프로바이더별 RTP 비교','art.rtp.desc':'실측 데이터 기반.','foot.copy':'© 2025 Crypto Casino Hub. 정보 제공 목적이며 일부 링크는 제휴일 수 있습니다.','foot.disclosure':'광고 표기','foot.accountability':'책임성','foot.help':'도박중독 도움'},
-      es: {'brand.name':'Crypto Casino Hub','nav.guides':'Guías','nav.reviews':'Reseñas','nav.bonuses':'Bonos','nav.news':'Noticias','nav.compare':'Comparar','cta.suggest':'Sugerir un sitio','lang.label':'Traducir:','hero.kicker':'Mejores casinos cripto 2025','hero.title':'Reseñas honestas, pagos rápidos y alto RTP en un solo lugar','hero.desc':'Compara casinos compatibles con cripto, juegos, bonos y políticas KYC. Reseñas investigadas de forma independiente.','search.search':'Buscar','search.clear':'Limpiar','search.placeholder':'p. ej., no kyc, bono btc, soporte coreano','tags.fast':'# Pago rápido','tags.korean':'# Coreano','hero.badge':'Transparencia de anuncios y criterios de reseña','side.hot':'Destacado','side.deal':'Nuevo: 200% + 100FS','side.wager':'Hasta 1 BTC · 35x rollover','side.guide':'Guía','side.kyc':'¿Son seguros los casinos sin KYC?','side.meta':'Seguridad · AML · Anonimato','side.caution':'Precaución','side.blacklist':'Lista de pagos retrasados','side.complaints':'Quejas recientes','sec.top':'Top 6 casinos recomendados','sec.note':'La búsqueda se aplica a tarjetas y tabla.','badge.editor':'Selección del editor','badge.rtp':'Alto RTP','badge.new':'Nuevo','badge.bonus':'Gran bono','badge.mobile':'Optimizado para móvil','badge.verified':'Verificado','sec.compare':'Comparación rápida','sec.sort':'Ordenar:','sort.default':'Predeterminado','sort.rating':'Mayor calificación','sort.withdraw':'Pago más rápido','table.site':'Sitio','table.crypto':'Cripto','table.bonus':'Bono máx.','table.kyc':'KYC','table.payout':'Velocidad de pago','table.rating':'Calificación','kyc.optional':'Opcional','kyc.none':'Ninguno','kyc.required':'Requerido','payout.instant':'Instantáneo','btn.visit':'Visitar sitio','sec.latest':'Últimas guías y noticias','sec.more':'Ver más','art.bonus':'Entender los bonos cripto','art.bonus.desc':'Bono de match, giros gratis y rollover.','art.slot':'Nuevo lanzamiento de gran estudio','art.slot.desc':'Vista previa de RTP/volatilidad.','art.review':'Análisis de SaturnBet','art.review.desc':'KYC, pagos y bonos.','art.rtp':'Comparación de RTP por proveedor','art.rtp.desc':'Basado en datos medidos.','foot.copy':'© 2025 Crypto Casino Hub. Solo con fines informativos; algunos enlaces pueden ser afiliados.','foot.disclosure':'Divulgación de anuncios','foot.accountability':'Responsabilidad','foot.help':'Ayuda contra ludopatía'},
-      zh: {'brand.name':'Crypto Casino Hub','nav.guides':'指南','nav.reviews':'评测','nav.bonuses':'奖金','nav.news':'新闻','nav.compare':'对比','cta.suggest':'推荐网站','lang.label':'翻译：','hero.kicker':'2025 年最佳加密赌场','hero.title':'诚实评测、快速提款与高 RTP 一站式查看','hero.desc':'对比支持加密货币的赌场、游戏、奖金和 KYC 政策。所有评测均为独立调研。','search.search':'搜索','search.clear':'清除','search.placeholder':'例如：no kyc、btc 奖金、韩语支持','tags.fast':'# 快速提款','tags.korean':'# 韩语','hero.badge':'广告披露与评测标准透明','side.hot':'热门','side.deal':'新：200% 配比 + 100FS','side.wager':'最高 1 BTC · 35x 打码','side.guide':'指南','side.kyc':'无 KYC 赌场安全吗？','side.meta':'安全 · 反洗钱 · 匿名','side.caution':'注意','side.blacklist':'延迟提款黑名单','side.complaints':'近期投诉','sec.top':'推荐赌场 TOP 6','sec.note':'搜索同时作用于卡片和对比表。','badge.editor':'编辑精选','badge.rtp':'高 RTP','badge.new':'新','badge.bonus':'大奖金','badge.mobile':'移动优化','badge.verified':'已验证','sec.compare':'快速对比','sec.sort':'排序：','sort.default':'默认','sort.rating':'评分最高','sort.withdraw':'提款最快','table.site':'网站','table.crypto':'加密货币','table.bonus':'最大奖金','table.kyc':'KYC','table.payout':'提款速度','table.rating':'评分','kyc.optional':'可选','kyc.none':'无','kyc.required':'需要','payout.instant':'即时','btn.visit':'访问网站','sec.latest':'最新指南与新闻','sec.more':'查看更多','art.bonus':'了解加密奖金','art.bonus.desc':'配比、免费旋转与流水。','art.slot':'大型工作室新作','art.slot.desc':'RTP/波动率预览。','art.review':'SaturnBet 深度评测','art.review.desc':'KYC/提款/奖金体验。','art.rtp':'按供应商对比 RTP','art.rtp.desc':'基于实测数据。','foot.copy':'© 2025 Crypto Casino Hub。仅供信息参考；部分链接可能为联盟链接。','foot.disclosure':'广告披露','foot.accountability':'责任','foot.help':'博彩帮助'}
+      en: {
+        // Head
+        page_title: "Crypto Casino Hub – Compare, Bonuses & Fast Payouts",
+        page_desc: "Find & compare top crypto casinos: honest reviews, bonuses, KYC policies, and payout speed.",
+        og_title: "Crypto Casino Hub – Compare, Bonuses & Fast Payouts",
+        og_desc: "Top crypto casinos with thorough reviews, bonuses, and payout speed comparison.",
+        og_locale: "en_US",
+
+        // UI
+        'brand.name':'Crypto Casino Hub',
+        'nav.guides':'Guides','nav.reviews':'Reviews','nav.bonuses':'Bonuses','nav.news':'News','nav.compare':'Compare',
+        'cta.suggest':'Suggest a Site','lang.label':'Translate:',
+        'hero.kicker':'Best Crypto Casinos 2025','hero.title':'Honest reviews, fast payouts, and high RTP — all in one place','hero.desc':'Compare crypto-friendly casinos, slots/live games, bonuses, and KYC policies at a glance. All reviews are independently researched.',
+        'search.search':'Search','search.clear':'Clear','search.placeholder':'e.g., no kyc, btc bonus, Korean support',
+        'tags.fast':'# Fast Payout','tags.korean':'# Korean',
+        'hero.badge':'Transparent ad disclosures & review standards',
+        'side.hot':'Hot','side.deal':'New: 200% match + 100FS','side.wager':'Up to 1 BTC · 35x wagering','side.guide':'Guide','side.kyc':'Are no-KYC casinos safe?','side.meta':'Security · AML · Anonymity','side.caution':'Caution','side.blacklist':'Delayed payout blacklist','side.complaints':'Recent complaints',
+        'sec.top':'Top 6 Recommended Casinos','sec.note':'Search applies to both cards and the comparison table.',
+        'badge.editor':'Editor\'s Pick','badge.rtp':'High RTP','badge.new':'New','badge.bonus':'Big Bonus','badge.mobile':'Mobile Optimized','badge.verified':'Verified',
+        'sec.compare':'Quick Compare','sec.sort':'Sort:','sort.default':'Default','sort.rating':'Highest Rating','sort.withdraw':'Fastest Payout',
+        'table.site':'Site','table.crypto':'Crypto','table.bonus':'Max Bonus','table.kyc':'KYC','table.payout':'Payout Speed','table.rating':'Rating',
+        'kyc.optional':'Optional','kyc.none':'None','kyc.required':'Required','payout.instant':'Instant','btn.visit':'Visit Site',
+        'sec.latest':'Latest Guides & News','sec.more':'See more',
+        'art.bonus':'Understanding crypto bonuses','art.bonus.desc':'Match bonus, free spins, wagering terms.',
+        'art.slot':'New release from a major slot studio','art.slot.desc':'RTP/volatility preview.',
+        'art.review':'SaturnBet deep dive','art.review.desc':'KYC, payouts, and bonus experience.',
+        'art.rtp':'RTP comparison by provider','art.rtp.desc':'Based on measured data.',
+        'foot.copy':'© 2025 Crypto Casino Hub. For informational purposes only; some links may be affiliate.',
+        'foot.disclosure':'Ad disclosure','foot.accountability':'Accountability','foot.help':'Gambling help'
+      },
+      zh: {
+        page_title: "Crypto Casino Hub – 加密赌场对比、红利与快速提款",
+        page_desc: "查找并对比顶级加密赌场：详尽评测、红利、KYC 政策与提款速度。",
+        og_title: "Crypto Casino Hub – 加密赌场对比",
+        og_desc: "提供权威评测、红利信息与提款速度对比，助你挑选合适的加密赌场。",
+        og_locale: "zh_CN",
+
+        'brand.name':'Crypto Casino Hub',
+        'nav.guides':'指南','nav.reviews':'评测','nav.bonuses':'奖金','nav.news':'新闻','nav.compare':'对比',
+        'cta.suggest':'推荐网站','lang.label':'翻译：',
+        'hero.kicker':'2025 年最佳加密赌场','hero.title':'诚实评测、快速提款与高 RTP 一站式查看','hero.desc':'对比支持加密货币的赌场、游戏、奖金和 KYC 政策。所有评测均为独立调研。',
+        'search.search':'搜索','search.clear':'清除','search.placeholder':'例如：no kyc、btc 奖金、韩语支持',
+        'tags.fast':'# 快速提款','tags.korean':'# 韩语',
+        'hero.badge':'广告披露与评测标准透明',
+        'side.hot':'热门','side.deal':'新：200% 配比 + 100FS','side.wager':'最高 1 BTC · 35x 打码','side.guide':'指南','side.kyc':'无 KYC 赌场安全吗？','side.meta':'安全 · 反洗钱 · 匿名','side.caution':'注意','side.blacklist':'延迟提款黑名单','side.complaints':'近期投诉',
+        'sec.top':'推荐赌场 TOP 6','sec.note':'搜索同时作用于卡片和对比表。',
+        'badge.editor':'编辑精选','badge.rtp':'高 RTP','badge.new':'新','badge.bonus':'大奖金','badge.mobile':'移动优化','badge.verified':'已验证',
+        'sec.compare':'快速对比','sec.sort':'排序：','sort.default':'默认','sort.rating':'评分最高','sort.withdraw':'提款最快',
+        'table.site':'网站','table.crypto':'加密货币','table.bonus':'最大奖金','table.kyc':'KYC','table.payout':'提款速度','table.rating':'评分',
+        'kyc.optional':'可选','kyc.none':'无','kyc.required':'需要','payout.instant':'即时','btn.visit':'访问网站',
+        'sec.latest':'最新指南与新闻','sec.more':'查看更多',
+        'art.bonus':'了解加密奖金','art.bonus.desc':'配比、免费旋转与流水。','art.slot':'大型工作室新作','art.slot.desc':'RTP/波动率预览。','art.review':'SaturnBet 深度评测','art.review.desc':'KYC/提款/奖金体验。','art.rtp':'按供应商对比 RTP','art.rtp.desc':'基于实测数据。','foot.copy':'© 2025 Crypto Casino Hub。仅供信息参考；部分链接可能为联盟链接。','foot.disclosure':'广告披露','foot.accountability':'责任','foot.help':'博彩帮助'
+      },
+      ko: {
+        page_title: "Crypto Casino Hub – 비교, 보너스, 빠른 출금",
+        page_desc: "신뢰 가능한 리뷰와 보너스, KYC 정책, 출금 속도를 비교하세요.",
+        og_title: "Crypto Casino Hub – 암호화폐 카지노 비교",
+        og_desc: "정직한 리뷰와 보너스, 출금 속도 비교로 최적의 카지노를 찾아보세요.",
+        og_locale: "ko_KR",
+
+        'brand.name':'Crypto Casino Hub',
+        'nav.guides':'가이드','nav.reviews':'리뷰','nav.bonuses':'보너스','nav.news':'뉴스','nav.compare':'비교',
+        'cta.suggest':'사이트 제안하기','lang.label':'번역:',
+        'hero.kicker':'2025 베스트 암호화폐 카지노','hero.title':'정직한 리뷰 · 빠른 출금 · 높은 RTP를 한눈에','hero.desc':'암호화폐 지원 카지노와 게임, 보너스, KYC 정책을 비교하세요. 모든 리뷰는 독립적으로 조사합니다.',
+        'search.search':'검색','search.clear':'지우기','search.placeholder':'예: no kyc, btc 보너스, 한국어 지원',
+        'tags.fast':'# 빠른출금','tags.korean':'# 한국어',
+        'hero.badge':'광고 표기 및 리뷰 기준 투명',
+        'side.hot':'핫딜','side.deal':'신규: 200% 매치 + 100FS','side.wager':'최대 1 BTC · 35x 베팅','side.guide':'가이드','side.kyc':'KYC 없는 카지노, 안전할까?','side.meta':'보안 · AML · 익명성','side.caution':'주의','side.blacklist':'지연 출금 블랙리스트','side.complaints':'최근 민원',
+        'sec.top':'추천 카지노 TOP 6','sec.note':'검색은 카드와 비교표에 동시에 적용됩니다.',
+        'badge.editor':'에디터 추천','badge.rtp':'높은 RTP','badge.new':'신규','badge.bonus':'보너스 큼','badge.mobile':'모바일 최적','badge.verified':'검증됨',
+        'sec.compare':'빠른 비교','sec.sort':'정렬:','sort.default':'기본순','sort.rating':'평점 높은순','sort.withdraw':'출금 빠른순',
+        'table.site':'사이트','table.crypto':'암호화폐','table.bonus':'최대 보너스','table.kyc':'KYC','table.payout':'출금속도','table.rating':'평점',
+        'kyc.optional':'선택','kyc.none':'없음','kyc.required':'필요','payout.instant':'즉시','btn.visit':'사이트 방문',
+        'sec.latest':'최신 가이드 & 뉴스','sec.more':'더 보기',
+        'art.bonus':'암호화폐 보너스 이해하기','art.bonus.desc':'매치, 프리스핀, 웨이저링.','art.slot':'대형 슬롯 스튜디오 신작','art.slot.desc':'RTP/변동성 미리 보기.','art.review':'SaturnBet 심층 리뷰','art.review.desc':'KYC/출금/보너스 체험담.','art.rtp':'프로바이더별 RTP 비교','art.rtp.desc':'실측 데이터 기반.','foot.copy':'© 2025 Crypto Casino Hub. 정보 제공 목적이며 일부 링크는 제휴일 수 있습니다.','foot.disclosure':'광고 표기','foot.accountability':'책임성','foot.help':'도박중독 도움'
+      },
+      fr: {
+        page_title: "Crypto Casino Hub – Comparer, Bonus & Retraits rapides",
+        page_desc: "Trouvez et comparez les meilleurs casinos crypto : avis honnêtes, bonus, KYC et vitesse de retrait.",
+        og_title: "Crypto Casino Hub – Comparateur de casinos crypto",
+        og_desc: "Avis détaillés, bonus et comparaison des vitesses de retrait.",
+        og_locale: "fr_FR",
+
+        'brand.name':'Crypto Casino Hub',
+        'nav.guides':'Guides','nav.reviews':'Avis','nav.bonuses':'Bonus','nav.news':'Actus','nav.compare':'Comparer',
+        'cta.suggest':'Suggérer un site','lang.label':'Traduire :',
+        'hero.kicker':'Meilleurs casinos crypto 2025','hero.title':'Avis honnêtes, retraits rapides et RTP élevé — au même endroit','hero.desc':'Comparez casinos crypto, jeux, bonus et politiques KYC. Tous les avis sont indépendants.',
+        'search.search':'Rechercher','search.clear':'Effacer','search.placeholder':'ex.: no kyc, bonus btc, support coréen',
+        'tags.fast':'# Retrait rapide','tags.korean':'# Coréen',
+        'hero.badge':'Transparence des annonces & critères d’avis',
+        'side.hot':'À la une','side.deal':'Nouveau : 200% + 100FS','side.wager':'Jusqu’à 1 BTC · 35x mise','side.guide':'Guide','side.kyc':'Les casinos sans KYC sont-ils sûrs ?','side.meta':'Sécurité · LBC · Anonymat','side.caution':'Attention','side.blacklist':'Liste des retraits retardés','side.complaints':'Réclamations récentes',
+        'sec.top':'Top 6 casinos recommandés','sec.note':'La recherche s’applique aux cartes et au tableau.',
+        'badge.editor':'Sélection de la rédaction','badge.rtp':'Haut RTP','badge.new':'Nouveau','badge.bonus':'Gros bonus','badge.mobile':'Optimisé mobile','badge.verified':'Vérifié',
+        'sec.compare':'Comparaison rapide','sec.sort':'Trier :','sort.default':'Par défaut','sort.rating':'Note la plus élevée','sort.withdraw':'Retrait le plus rapide',
+        'table.site':'Site','table.crypto':'Crypto','table.bonus':'Bonus max.','table.kyc':'KYC','table.payout':'Vitesse de retrait','table.rating':'Note',
+        'kyc.optional':'Optionnel','kyc.none':'Aucun','kyc.required':'Requis','payout.instant':'Immédiat','btn.visit':'Visiter le site',
+        'sec.latest':'Derniers guides & actus','sec.more':'Voir plus',
+        'art.bonus':'Comprendre les bonus crypto','art.bonus.desc':'Bonus de dépôt, free spins, exigences de mise.',
+        'art.slot':'Nouvelle sortie d’un grand studio','art.slot.desc':'Aperçu RTP/volatilité.',
+        'art.review':'SaturnBet à la loupe','art.review.desc':'KYC, retraits, bonus.',
+        'art.rtp':'Comparatif RTP par fournisseur','art.rtp.desc':'Basé sur des données mesurées.',
+        'foot.copy':'© 2025 Crypto Casino Hub. À titre informatif ; certains liens peuvent être affiliés.','foot.disclosure':'Transparence pub','foot.accountability':'Responsabilité','foot.help':'Aide au jeu'
+      },
+      es: {
+        page_title: "Crypto Casino Hub – Comparar, Bonos y Pagos rápidos",
+        page_desc: "Encuentra y compara los mejores casinos cripto: reseñas, bonos, KYC y velocidad de pago.",
+        og_title: "Crypto Casino Hub – Comparador de casinos cripto",
+        og_desc: "Reseñas completas, bonos y comparación de pagos.",
+        og_locale: "es_ES",
+
+        'brand.name':'Crypto Casino Hub',
+        'nav.guides':'Guías','nav.reviews':'Reseñas','nav.bonuses':'Bonos','nav.news':'Noticias','nav.compare':'Comparar',
+        'cta.suggest':'Sugerir un sitio','lang.label':'Traducir:',
+        'hero.kicker':'Mejores casinos cripto 2025','hero.title':'Reseñas honestas, pagos rápidos y alto RTP en un solo lugar','hero.desc':'Compara casinos compatibles con cripto, juegos, bonos y políticas KYC. Reseñas investigadas de forma independiente.',
+        'search.search':'Buscar','search.clear':'Limpiar','search.placeholder':'p. ej., no kyc, bono btc, soporte coreano',
+        'tags.fast':'# Pago rápido','tags.korean':'# Coreano',
+        'hero.badge':'Transparencia de anuncios y criterios de reseña',
+        'side.hot':'Destacado','side.deal':'Nuevo: 200% + 100FS','side.wager':'Hasta 1 BTC · 35x rollover','side.guide':'Guía','side.kyc':'¿Son seguros los casinos sin KYC?','side.meta':'Seguridad · AML · Anonimato','side.caution':'Precaución','side.blacklist':'Lista de pagos retrasados','side.complaints':'Quejas recientes',
+        'sec.top':'Top 6 casinos recomendados','sec.note':'La búsqueda se aplica a tarjetas y tabla.',
+        'badge.editor':'Selección del editor','badge.rtp':'Alto RTP','badge.new':'Nuevo','badge.bonus':'Gran bono','badge.mobile':'Optimizado para móvil','badge.verified':'Verificado',
+        'sec.compare':'Comparación rápida','sec.sort':'Ordenar:','sort.default':'Predeterminado','sort.rating':'Mayor calificación','sort.withdraw':'Pago más rápido',
+        'table.site':'Sitio','table.crypto':'Cripto','table.bonus':'Bono máx.','table.kyc':'KYC','table.payout':'Velocidad de pago','table.rating':'Calificación',
+        'kyc.optional':'Opcional','kyc.none':'Ninguno','kyc.required':'Requerido','payout.instant':'Instantáneo','btn.visit':'Visitar sitio',
+        'sec.latest':'Últimas guías y noticias','sec.more':'Ver más',
+        'art.bonus':'Entender los bonos cripto','art.bonus.desc':'Bono de match, giros gratis y rollover.',
+        'art.slot':'Nuevo lanzamiento de gran estudio','art.slot.desc':'Vista previa de RTP/volatilidad.',
+        'art.review':'Análisis de SaturnBet','art.review.desc':'KYC, pagos y bonos.',
+        'art.rtp':'Comparación de RTP por proveedor','art.rtp.desc':'Basado en datos medidos.',
+        'foot.copy':'© 2025 Crypto Casino Hub. Solo con fines informativos; algunos enlaces pueden ser afiliados.','foot.disclosure':'Divulgación de anuncios','foot.accountability':'Responsabilidad','foot.help':'Ayuda contra ludopatía'
+      },
+      ja: {
+        page_title: "Crypto Casino Hub – 比較・ボーナス・高速出金",
+        page_desc: "信頼できるレビュー、ボーナス、KYC、出金速度で暗号カジノを比較。",
+        og_title: "Crypto Casino Hub – 暗号カジノ比較",
+        og_desc: "詳細なレビューとボーナス情報、出金速度の比較を提供。",
+        og_locale: "ja_JP",
+
+        'brand.name':'Crypto Casino Hub',
+        'nav.guides':'ガイド','nav.reviews':'レビュー','nav.bonuses':'ボーナス','nav.news':'ニュース','nav.compare':'比較',
+        'cta.suggest':'サイトを提案','lang.label':'翻訳:',
+        'hero.kicker':'2025年ベスト暗号通貨カジノ','hero.title':'正直なレビュー、迅速な出金、高いRTPを一括比較','hero.desc':'暗号通貨対応カジノ、ゲーム、ボーナス、KYC方針を比較。レビューは独立調査に基づきます。',
+        'search.search':'検索','search.clear':'クリア','search.placeholder':'例: no kyc, btc ボーナス, 日本語対応',
+        'tags.fast':'# 高速出金','tags.korean':'# 韓国語',
+        'hero.badge':'広告開示とレビュー基準を透明化',
+        'side.hot':'注目','side.deal':'新規: 200%マッチ + 100FS','side.wager':'最大1 BTC · 35x賭け条件','side.guide':'ガイド','side.kyc':'KYC不要のカジノは安全？','side.meta':'セキュリティ · AML · 匿名性','side.caution':'注意','side.blacklist':'出金遅延ブラックリスト','side.complaints':'最近の苦情',
+        'sec.top':'おすすめカジノ TOP6','sec.note':'検索はカードと比較表の両方に適用されます。',
+        'badge.editor':'編集部おすすめ','badge.rtp':'高RTP','badge.new':'新着','badge.bonus':'大型ボーナス','badge.mobile':'モバイル最適化','badge.verified':'検証済み',
+        'sec.compare':'クイック比較','sec.sort':'並び替え:','sort.default':'デフォルト','sort.rating':'評価が高い順','sort.withdraw':'出金が速い順',
+        'table.site':'サイト','table.crypto':'暗号資産','table.bonus':'最大ボーナス','table.kyc':'KYC','table.payout':'出金速度','table.rating':'評価',
+        'kyc.optional':'任意','kyc.none':'なし','kyc.required':'必須','payout.instant':'即時','btn.visit':'サイトへ',
+        'sec.latest':'最新ガイド & ニュース','sec.more':'もっと見る',
+        'art.bonus':'暗号ボーナスの基礎','art.bonus.desc':'マッチ、フリースピン、賭け条件。',
+        'art.slot':'大手スタジオの新作','art.slot.desc':'RTP/ボラのプレビュー。',
+        'art.review':'SaturnBet 徹底解説','art.review.desc':'KYC/出金/ボーナス体験。',
+        'art.rtp':'プロバイダ別RTP比較','art.rtp.desc':'実測データに基づく。',
+        'foot.copy':'© 2025 Crypto Casino Hub. 情報提供のみ。アフィリエイトリンクを含む場合があります。','foot.disclosure':'広告開示','foot.accountability':'説明責任','foot.help':'ギャンブル依存対策'
+      },
+      hi: {
+        page_title: "Crypto Casino Hub – तुलना, बोनस और तेज़ निकासी",
+        page_desc: "शीर्ष क्रिप्टो कसीनो की ईमानदार समीक्षा, बोनस, KYC नीतियाँ और निकासी गति की तुलना करें।",
+        og_title: "Crypto Casino Hub – क्रिप्टो कसीनो तुलना",
+        og_desc: "विस्तृत समीक्षाएँ, बोनस और निकासी गति तुलना।",
+        og_locale: "hi_IN",
+
+        'brand.name':'Crypto Casino Hub',
+        'nav.guides':'गाइड','nav.reviews':'समीक्षाएँ','nav.bonuses':'बोनस','nav.news':'समाचार','nav.compare':'तुलना',
+        'cta.suggest':'साइट सुझाएँ','lang.label':'भाषा:',
+        'hero.kicker':'2025 के श्रेष्ठ क्रिप्टो कसीनो','hero.title':'ईमानदार समीक्षा, तेज़ निकासी और उच्च RTP — एक ही जगह','hero.desc':'क्रिप्टो-फ्रेंडली कसीनो, गेम्स, बोनस और KYC नीतियों की तुलना करें। सभी समीक्षाएँ स्वतंत्र शोध पर आधारित हैं।',
+        'search.search':'खोजें','search.clear':'साफ करें','search.placeholder':'जैसे: no kyc, btc बोनस, हिंदी सपोर्ट',
+        'tags.fast':'# तेज़ निकासी','tags.korean':'# कोरियाई',
+        'hero.badge':'विज्ञापन प्रकटीकरण और समीक्षा मानक पारदर्शी',
+        'side.hot':'हॉट','side.deal':'नया: 200% मैच + 100FS','side.wager':'अधिकतम 1 BTC · 35x वेजरिंग','side.guide':'गाइड','side.kyc':'बिना KYC कसीनो सुरक्षित हैं?','side.meta':'सुरक्षा · AML · गुमनामी','side.caution':'सावधान','side.blacklist':'देरी से निकासी की ब्लैकलिस्ट','side.complaints':'हालिया शिकायतें',
+        'sec.top':'शीर्ष 6 अनुशंसित कसीनो','sec.note':'खोज कार्ड्स और तुलना तालिका दोनों पर लागू होती है।',
+        'badge.editor':'संपादक की पसंद','badge.rtp':'उच्च RTP','badge.new':'नया','badge.bonus':'बड़ा बोनस','badge.mobile':'मोबाइल अनुकूल','badge.verified':'सत्यापित',
+        'sec.compare':'त्वरित तुलना','sec.sort':'क्रमबद्ध:','sort.default':'डिफ़ॉल्ट','sort.rating':'उच्चतम रेटिंग','sort.withdraw':'सबसे तेज़ निकासी',
+        'table.site':'साइट','table.crypto':'क्रिप्टो','table.bonus':'अधिकतम बोनस','table.kyc':'KYC','table.payout':'निकासी गति','table.rating':'रेटिंग',
+        'kyc.optional':'वैकल्पिक','kyc.none':'नहीं','kyc.required':'आवश्यक','payout.instant':'तुरंत','btn.visit':'साइट देखें',
+        'sec.latest':'नवीनतम गाइड्स और समाचार','sec.more':'और देखें',
+        'art.bonus':'क्रिप्टो बोनस समझें','art.bonus.desc':'मैच बोनस, फ्री स्पिन्स, वेजरिंग।',
+        'art.slot':'बड़े स्लॉट स्टूडियो की नई रिलीज़','art.slot.desc':'RTP/वोलैटिलिटी प्रीव्यू।',
+        'art.review':'SaturnBet विस्तृत समीक्षा','art.review.desc':'KYC, निकासी और बोनस अनुभव।',
+        'art.rtp':'प्रदाता द्वारा RTP तुलना','art.rtp.desc':'मापन किए गए डेटा पर आधारित।',
+        'foot.copy':'© 2025 Crypto Casino Hub. केवल जानकारी हेतु; कुछ लिंक संबद्ध हो सकते हैं।','foot.disclosure':'विज्ञापन प्रकटीकरण','foot.accountability':'जवाबदेही','foot.help':'जुआ सहायता'
+      },
+      ar: {
+        page_title: "Crypto Casino Hub – المقارنة والمكافآت والسحب السريع",
+        page_desc: "قارن أفضل كازينوهات العملات المشفّرة: مراجعات صادقة، مكافآت، سياسات KYC وسرعة السحب.",
+        og_title: "Crypto Casino Hub – مقارنة كازينوهات الكريبتو",
+        og_desc: "مراجعات تفصيلية ومعلومات عن المكافآت ومقارنة سرعات السحب.",
+        og_locale: "ar_SA",
+
+        'brand.name':'Crypto Casino Hub',
+        'nav.guides':'أدلة','nav.reviews':'مراجعات','nav.bonuses':'مكافآت','nav.news':'أخبار','nav.compare':'مقارنة',
+        'cta.suggest':'اقترح موقعاً','lang.label':'اللغة:',
+        'hero.kicker':'أفضل كازينوهات الكريبتو 2025','hero.title':'مراجعات صادقة وسحب سريع وRTP مرتفع — في مكان واحد','hero.desc':'قارن الكازينوهات الداعمة للكريبتو والألعاب والمكافآت وسياسات التحقق KYC. جميع المراجعات مستقلة.',
+        'search.search':'ابحث','search.clear':'مسح','search.placeholder':'مثال: بدون تحقق، مكافأة BTC، دعم كوري',
+        'tags.fast':'# سحب سريع','tags.korean':'# الكورية',
+        'hero.badge':'شفافية الإعلانات ومعايير المراجعة',
+        'side.hot':'مميز','side.deal':'جديد: ‎200%‎ + ‎100FS‎','side.wager':'حتى ‎1 BTC‎ · رهان ‎35x‎','side.guide':'دليل','side.kyc':'هل كازينوهات بلا تحقق آمنة؟','side.meta':'أمان · مكافحة غسل الأموال · خصوصية','side.caution':'تحذير','side.blacklist':'قائمة تأخير السحب','side.complaints':'شكاوى حديثة',
+        'sec.top':'أفضل 6 كازينوهات موصى بها','sec.note':'تنطبق عملية البحث على البطاقات والجدول.',
+        'badge.editor':'اختيار المحرر','badge.rtp':'RTP مرتفع','badge.new':'جديد','badge.bonus':'مكافأة كبيرة','badge.mobile':'محسّن للجوال','badge.verified':'موثّق',
+        'sec.compare':'مقارنة سريعة','sec.sort':'ترتيب:','sort.default':'افتراضي','sort.rating':'الأعلى تقييماً','sort.withdraw':'الأسرع سحباً',
+        'table.site':'الموقع','table.crypto':'العملة','table.bonus':'أقصى مكافأة','table.kyc':'التحقق','table.payout':'سرعة السحب','table.rating':'التقييم',
+        'kyc.optional':'اختياري','kyc.none':'لا يوجد','kyc.required':'مطلوب','payout.instant':'فوري','btn.visit':'زيارة الموقع',
+        'sec.latest':'آخر الأدلة والأخبار','sec.more':'المزيد',
+        'art.bonus':'فهم مكافآت الكريبتو','art.bonus.desc':'مكافأة المطابقة، اللفات المجانية، متطلبات الرهان.',
+        'art.slot':'إصدار جديد من استوديو كبير','art.slot.desc':'لمحة عن RTP/التذبذب.',
+        'art.review':'نظرة معمقة على SaturnBet','art.review.desc':'التحقق والسحب وتجربة المكافآت.',
+        'art.rtp':'مقارنة RTP حسب المزوّد','art.rtp.desc':'استناداً إلى بيانات مقاسة.',
+        'foot.copy':'© 2025 Crypto Casino Hub. لأغراض معلوماتية فقط؛ قد تحتوي بعض الروابط على عمولة.','foot.disclosure':'بيان الإعلانات','foot.accountability':'المسؤولية','foot.help':'مساعدة المقامرة'
+      }
     };
 
-    // Apply translations to [data-i18n] and [data-i18n-placeholder]
-    function applyLang(lang){
+    // Update <head> (title/meta/OG/Twitter) according to language
+    function applyHeadMeta(dict){
+      if (!dict) return;
+      // Title
+      if (dict.page_title) document.title = dict.page_title;
+
+      // Meta description
+      const mDesc = document.querySelector('meta[name="description"]');
+      if (mDesc && dict.page_desc) mDesc.setAttribute('content', dict.page_desc);
+
+      // Open Graph
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle && dict.og_title) ogTitle.setAttribute('content', dict.og_title);
+      const ogDesc = document.querySelector('meta[property="og:description"]');
+      if (ogDesc && dict.og_desc) ogDesc.setAttribute('content', dict.og_desc);
+      const ogLocale = document.querySelector('meta[property="og:locale"]');
+      if (ogLocale && dict.og_locale) ogLocale.setAttribute('content', dict.og_locale);
+
+      // Twitter
+      const twTitle = document.querySelector('meta[name="twitter:title"]');
+      if (twTitle && dict.og_title) twTitle.setAttribute('content', dict.og_title);
+      const twDesc = document.querySelector('meta[name="twitter:description"]');
+      if (twDesc && dict.og_desc) twDesc.setAttribute('content', dict.og_desc);
+    }
+
+    // Apply UI text + placeholders
+    function applyUI(lang){
       const dict = I18N[lang] || I18N.en;
-      document.documentElement.lang = (lang in I18N) ? lang : 'en';
+      document.documentElement.lang = lang in I18N ? lang : 'en';
+      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+
       document.querySelectorAll('[data-i18n]').forEach(el=>{
         const key = el.getAttribute('data-i18n');
         if (dict[key]) el.textContent = dict[key];
@@ -401,52 +659,58 @@
         const key = el.getAttribute('data-i18n-placeholder');
         if (dict[key]) el.setAttribute('placeholder', dict[key]);
       });
+
+      // Head metas
+      applyHeadMeta(dict);
     }
 
-    // --- GeoIP → Browser → English fallback ---
-    const supported = ['en','ja','ko','es','zh'];
+    // GeoIP → Browser → English
+    const supported = ['en','zh','ko','fr','es','ja','hi','ar'];
     const langSelect = document.getElementById('langSelect');
 
     function countryToLang(cc){
       switch (cc) {
         case 'KR': return 'ko';
         case 'JP': return 'ja';
-        // Spanish-speaking (major)
-        case 'ES': case 'MX': case 'AR': case 'CO': case 'CL': case 'PE': case 'VE':
-        case 'UY': case 'PY': case 'BO': case 'EC': case 'GT': case 'CU': case 'DO':
-        case 'HN': case 'NI': case 'SV': case 'CR': case 'PA': case 'GQ': return 'es';
-        // Chinese regions → zh (simplified here)
         case 'CN': case 'HK': case 'MO': case 'TW': return 'zh';
+        case 'IN': return 'hi';
+        // Arabic-speaking (non-exhaustive)
+        case 'SA': case 'AE': case 'EG': case 'QA': case 'KW': case 'OM': case 'BH':
+        case 'JO': case 'PS': case 'IQ': case 'YE': case 'LY': case 'DZ': case 'MA': case 'TN': case 'SD': return 'ar';
+        // French
+        case 'FR': case 'BE': case 'CH': case 'CA': case 'LU': case 'MC': case 'SN': case 'CI': case 'CM': case 'TN': case 'DZ': return 'fr';
+        // Spanish
+        case 'ES': case 'MX': case 'AR': case 'CO': case 'CL': case 'PE': case 'VE': case 'UY': case 'PY': case 'BO':
+        case 'EC': case 'GT': case 'CU': case 'DO': case 'HN': case 'NI': case 'SV': case 'CR': case 'PA': case 'GQ': return 'es';
         default: return 'en';
       }
     }
 
     async function detectGeoLang(timeoutMs=1500){
       const ctrl = new AbortController();
-      const t = setTimeout(()=>ctrl.abort(), timeoutMs);
-      try {
-        const resp = await fetch('https://ipwho.is/', {signal: ctrl.signal});
-        clearTimeout(t);
-        if (!resp.ok) return null;
-        const data = await resp.json();
-        if (data && data.success !== false && data.country_code){
-          const cc = String(data.country_code).toUpperCase();
-          const lang = countryToLang(cc);
+      const timer = setTimeout(()=>ctrl.abort(), timeoutMs);
+      try{
+        const r = await fetch('https://ipwho.is/', {signal: ctrl.signal});
+        clearTimeout(timer);
+        if (!r.ok) return null;
+        const j = await r.json();
+        if (j && j.success !== false && j.country_code){
+          const lang = countryToLang(String(j.country_code).toUpperCase());
           return supported.includes(lang) ? lang : 'en';
         }
         return null;
-      } catch(e){
-        clearTimeout(t);
-        return null;
-      }
+      }catch(e){ clearTimeout(timer); return null; }
     }
 
     function detectBrowserLang(){
       const raw = (navigator.language || (Intl.DateTimeFormat().resolvedOptions().locale) || 'en').toLowerCase();
-      if (raw.startsWith('ja')) return 'ja';
-      if (raw.startsWith('ko')) return 'ko';
-      if (raw.startsWith('es')) return 'es';
       if (raw.startsWith('zh')) return 'zh';
+      if (raw.startsWith('ko')) return 'ko';
+      if (raw.startsWith('fr')) return 'fr';
+      if (raw.startsWith('es')) return 'es';
+      if (raw.startsWith('ja')) return 'ja';
+      if (raw.startsWith('hi')) return 'hi';
+      if (raw.startsWith('ar')) return 'ar';
       return 'en';
     }
 
@@ -455,12 +719,12 @@
       if (!initial) initial = detectBrowserLang();
       if (!supported.includes(initial)) initial = 'en';
       langSelect.value = initial;
-      applyLang(initial);
+      applyUI(initial);
     })();
 
-    langSelect.addEventListener('change', ()=> applyLang(langSelect.value));
+    langSelect.addEventListener('change', ()=> applyUI(langSelect.value));
 
-    // ====== Search / Filter / Sort (multilingual-ready) ======
+    // ====== Search / Filter / Sort (multilingual) ======
     const input = document.getElementById('q');
     const btn   = document.getElementById('searchBtn');
     const clearBtn = document.getElementById('clearBtn');
@@ -468,24 +732,25 @@
     const sortSelect = document.getElementById('sortSelect');
     const table = document.getElementById('compareTable');
 
-    let timer = null;
-    input.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(applyFilter, 120); });
+    let timerId = null;
+    input.addEventListener('input', () => { clearTimeout(timerId); timerId = setTimeout(applyFilter, 120); });
     btn.addEventListener('click', (e) => { e.preventDefault(); applyFilter(); });
     input.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ e.preventDefault(); applyFilter(); } });
     clearBtn.addEventListener('click', ()=>{ input.value=''; updateURL(''); applyFilter(); input.focus(); });
     pills.addEventListener('click', (e)=>{
       const el = e.target.closest('[data-tag]');
       if(!el) return;
-      // pills의 data-tag는 다국어 키워드 묶음(쉼표 구분)
       const tags = (el.getAttribute('data-tag') || '').split(',').map(s=>s.trim()).filter(Boolean);
-      // 현재 UI 언어와 가장 가까운 토큰을 우선 삽입(간단 매칭)
       const cur = langSelect.value;
       let pick = tags[0];
       for (const t of tags){
         if (cur==='ja' && /[ぁ-んァ-ヶ一-龥]/.test(t)) { pick = t; break; }
         if (cur==='ko' && /[가-힣]/.test(t)) { pick = t; break; }
-        if (cur==='es' && /[áéíóúñ]|solo|pago|bono|cripto|rápido|horas|sitio|visitar/i.test(t)) { pick = t; break; }
         if (cur==='zh' && /[\u4e00-\u9fff]/.test(t)) { pick = t; break; }
+        if (cur==='ar' && /[\u0600-\u06FF]/.test(t)) { pick = t; break; }
+        if (cur==='hi' && /[\u0900-\u097F]/.test(t)) { pick = t; break; }
+        if (cur==='fr' && /[éèêàùç]|retrait|bonus|traduire|guide/i.test(t)) { pick = t; break; }
+        if (cur==='es' && /[áéíóúñ]|pago|bono|guía|sitio/i.test(t)) { pick = t; break; }
         if (cur==='en' && /^[a-z0-9#\s]+$/i.test(t)) { pick = t; break; }
       }
       const now = input.value.trim();
