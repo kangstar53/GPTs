@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Crypto Casino Hub – Search + Built-in i18n</title>
-  <meta name="description" content="Crypto casino reviews/guides portal – search/filter + built-in multi-language (no external widget)" />
+  <title>Crypto Casino Hub – Search + Built-in i18n (GeoIP)</title>
+  <meta name="description" content="Crypto casino reviews/guides portal – search/filter + built-in multi-language with GeoIP default" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -85,8 +85,6 @@
     /* utilities */
     .hide-mobile{display:block} @media (max-width:640px){ .hide-mobile{display:none} }
     .muted{color:var(--sub)}
-
-    /* Requested: comparison-table buttons at 90% size */
     .table .btn{font-size:0.9em; padding:6px 10px}
     .table .btn.primary{font-size:0.9em; padding:6px 10px}
   </style>
@@ -106,12 +104,11 @@
         <a href="#compare" data-i18n="nav.compare">Compare</a>
       </nav>
       <div class="cta">
-        <!-- Login removed -->
         <a class="btn primary" id="suggestBtn"
            href="mailto:kangstar53@gmail.com?subject=Site%20Suggestion"
            data-i18n="cta.suggest">Suggest a Site</a>
 
-        <!-- Custom language select -->
+        <!-- Language select -->
         <div class="lang">
           <label class="hide-mobile" for="langSelect" data-i18n="lang.label">Translate:</label>
           <select id="langSelect" class="select" aria-label="Language">
@@ -197,7 +194,7 @@
       </div>
 
       <div class="grid cols-3" id="cards">
-        <!-- Card 1 -->
+        <!-- 6 cards (images link to ThemeWagon as requested) -->
         <article class="card" data-tags="saturnbet btc fast payout no kyc korean">
           <a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener" class="thumb-link">
             <div class="thumb"><img src="SaturnBet.jpg" alt="SaturnBet"></div>
@@ -209,7 +206,6 @@
           </div>
         </article>
 
-        <!-- Card 2 -->
         <article class="card" data-tags="orbitplay btc only no kyc instant">
           <a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener" class="thumb-link">
             <div class="thumb"><img src="OrbitPlay.jpg" alt="OrbitPlay"></div>
@@ -221,7 +217,6 @@
           </div>
         </article>
 
-        <!-- Card 3 -->
         <article class="card" data-tags="nebula eth usdt new">
           <a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener" class="thumb-link">
             <div class="thumb"><img src="NebulaWin.jpg" alt="NebulaWin"></div>
@@ -233,7 +228,6 @@
           </div>
         </article>
 
-        <!-- Card 4 -->
         <article class="card" data-tags="luna bonus big 2btc">
           <a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener" class="thumb-link">
             <div class="thumb"><img src="LunaLuck.jpg" alt="LunaLuck"></div>
@@ -245,7 +239,6 @@
           </div>
         </article>
 
-        <!-- Card 5 -->
         <article class="card" data-tags="cosmo mobile app">
           <a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener" class="thumb-link">
             <div class="thumb"><img src="CosmoSpin.jpg" alt="CosmoSpin"></div>
@@ -257,7 +250,6 @@
           </div>
         </article>
 
-        <!-- Card 6 -->
         <article class="card" data-tags="vega verified live">
           <a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener" class="thumb-link">
             <div class="thumb"><img src="VegaRoll.jpg" alt="VegaRoll"></div>
@@ -453,24 +445,60 @@
       }
     };
 
-    // Apply translations to [data-i18n] textContent and [data-i18n-placeholder] placeholder
+    // Apply translations to [data-i18n] and [data-i18n-placeholder]
     function applyLang(lang){
       const dict = I18N[lang] || I18N.en;
       document.documentElement.lang = (lang in I18N) ? lang : 'en';
-      // text
       document.querySelectorAll('[data-i18n]').forEach(el=>{
         const key = el.getAttribute('data-i18n');
         if (dict[key]) el.textContent = dict[key];
       });
-      // placeholder
       document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
         const key = el.getAttribute('data-i18n-placeholder');
         if (dict[key]) el.setAttribute('placeholder', dict[key]);
       });
     }
 
-    // Language detect from browser; fallback to en
+    // --- GeoIP → Browser → English fallback ---
     const supported = ['en','ja','ko','es','zh'];
+    const langSelect = document.getElementById('langSelect');
+
+    // Country-code → language mapping (only our 5 languages; others → en)
+    function countryToLang(cc){
+      switch (cc) {
+        case 'KR': return 'ko';
+        case 'JP': return 'ja';
+        // Spanish-speaking countries (major list)
+        case 'ES': case 'MX': case 'AR': case 'CO': case 'CL': case 'PE': case 'VE':
+        case 'UY': case 'PY': case 'BO': case 'EC': case 'GT': case 'CU': case 'DO':
+        case 'HN': case 'NI': case 'SV': case 'CR': case 'PA': case 'GQ': return 'es';
+        // Chinese (we use simplified zh for CN/HK/MO/TW since only 5 languages are allowed)
+        case 'CN': case 'HK': case 'MO': case 'TW': return 'zh';
+        default: return 'en';
+      }
+    }
+
+    // Fetch GeoIP with timeout; returns language code or null
+    async function detectGeoLang(timeoutMs=1500){
+      const ctrl = new AbortController();
+      const t = setTimeout(()=>ctrl.abort(), timeoutMs);
+      try {
+        const resp = await fetch('https://ipwho.is/', {signal: ctrl.signal});
+        clearTimeout(t);
+        if (!resp.ok) return null;
+        const data = await resp.json();
+        if (data && data.success !== false && data.country_code){
+          const cc = String(data.country_code).toUpperCase();
+          const lang = countryToLang(cc);
+          return supported.includes(lang) ? lang : 'en';
+        }
+        return null;
+      } catch(e){
+        clearTimeout(t);
+        return null;
+      }
+    }
+
     function detectBrowserLang(){
       const raw = (navigator.language || (Intl.DateTimeFormat().resolvedOptions().locale) || 'en').toLowerCase();
       if (raw.startsWith('ja')) return 'ja';
@@ -480,10 +508,16 @@
       return 'en';
     }
 
-    const langSelect = document.getElementById('langSelect');
-    const initial = supported.includes(detectBrowserLang()) ? detectBrowserLang() : 'en';
-    langSelect.value = initial;
-    applyLang(initial);
+    // Initialize language selection
+    (async function initLang(){
+      let initial = await detectGeoLang();              // 1) GeoIP
+      if (!initial) initial = detectBrowserLang();      // 2) Browser
+      if (!supported.includes(initial)) initial = 'en'; // 3) English
+      langSelect.value = initial;
+      applyLang(initial);
+    })();
+
+    // Manual change
     langSelect.addEventListener('change', ()=> applyLang(langSelect.value));
 
     // ====== Search / Filter / Sort ======
