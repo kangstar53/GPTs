@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Crypto Casino Hub – Search + i18n (Google Translate)</title>
+  <meta name="description" content="Crypto casino reviews/guides portal – search/filter + Google Translate i18n" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0f14; --card:#111723; --muted:#0e141e; --primary:#47c3ff; --accent:#9cff57;
+      --text:#e8ecf2; --sub:#a8b0bd; --border:#2a3446; --warn:#ffcc66; --danger:#ff6b6b;
+      --radius:16px; --shadow:0 10px 30px rgba(0,0,0,.25);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0; font-family: Pretendard,system-ui,-apple-system,Segoe UI,Roboto,Arial,Apple SD Gothic Neo,Noto Sans KR,sans-serif; background:var(--bg); color:var(--text)}
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+    .container{width:min(1200px,100% - 32px); margin-inline:auto}
+
+    header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(1.2) blur(8px);
+      background:linear-gradient(180deg, rgba(11,15,20,.9), rgba(11,15,20,.6)); border-bottom:1px solid var(--border)}
+    .nav{display:flex; align-items:center; gap:16px; padding:14px 0}
+    .logo{display:flex; align-items:center; gap:10px; font-weight:700}
+    .logo-badge{width:28px; height:28px; border-radius:8px; background:linear-gradient(135deg,var(--primary),var(--accent)); box-shadow:var(--shadow)}
+    .nav-links{display:flex; gap:14px; flex-wrap:wrap; color:var(--sub)}
+    .nav-links a:hover{color:var(--text)}
+    .cta{margin-left:auto; display:flex; gap:10px; align-items:center}
+    .btn{padding:8px 12px; border-radius:12px; border:1px solid var(--border); background:var(--muted); color:var(--text); cursor:pointer; font-size:0.9em}
+    .btn:hover{filter:brightness(1.08)}
+    .btn.primary{background:var(--primary); border-color:transparent; color:#001018}
+
+    /* Lang selector */
+    .lang{display:flex; align-items:center; gap:8px}
+    .select{appearance:none; -webkit-appearance:none; -moz-appearance:none; background:var(--muted); border:1px solid var(--border); color:var(--text); padding:8px 12px; border-radius:12px}
+
+    /* hero */
+    .hero{padding:36px 0 20px}
+    .hero-grid{display:grid; grid-template-columns:1.6fr .9fr; gap:18px}
+    @media (max-width: 960px){ .hero-grid{grid-template-columns:1fr} }
+    .panel{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow)}
+    .hero-main{padding:24px}
+    .kicker{color:var(--accent); font-weight:600; letter-spacing:.02em}
+    .title{font-size:clamp(24px,3vw,36px); line-height:1.2; margin:8px 0 10px}
+    .sub{color:var(--sub)}
+    .search{margin-top:16px; display:flex; gap:8px}
+    .input{flex:1; background:#0e141e; border:1px solid var(--border); border-radius:12px; padding:12px 14px; color:var(--text)}
+    .pillbar{display:flex; gap:8px; margin-top:12px; flex-wrap:wrap}
+    .pill{font-size:14px; color:var(--sub); padding:8px 10px; border:1px solid var(--border); border-radius:999px; background:#0e141e; cursor:pointer}
+    .score{display:flex; align-items:center; gap:12px; margin-top:18px}
+    .stars{display:inline-flex; gap:4px}
+    .star{width:18px; height:18px; fill:gold}
+    .hero-side{display:grid; gap:12px; padding:12px}
+    .side-item{display:flex; gap:12px; padding:12px; border-radius:14px; border:1px solid var(--border); background:var(--muted)}
+    .side-item .tag{font-size:12px; color:#001018; background:var(--accent); padding:4px 8px; border-radius:999px; font-weight:700}
+
+    /* sections */
+    section{padding:20px 0}
+    .section-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:12px}
+    .section-head h2{font-size:20px; margin:0}
+    .grid{display:grid; gap:12px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    .grid.cols-4{grid-template-columns:repeat(4,1fr)}
+    @media (max-width: 960px){ .grid.cols-3,.grid.cols-4{grid-template-columns:1fr 1fr} }
+    @media (max-width: 640px){ .grid.cols-3,.grid.cols-4{grid-template-columns:1fr} }
+    .card{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; display:flex; flex-direction:column}
+    .card .thumb{aspect-ratio:16/9; background:#0c1e2d}
+    .card .thumb img{width:100%; height:100%; object-fit:cover}
+    .card .body{padding:14px}
+    .card h3 a{color:inherit; text-decoration:none}
+    .card h3 a:hover{text-decoration:underline}
+    .badge{font-size:12px; color:#001018; background:var(--primary); display:inline-block; padding:4px 8px; border-radius:999px; font-weight:700}
+    .meta{color:var(--sub); font-size:12px; margin-top:6px}
+
+    /* review table */
+    .table{width:100%; border-collapse:collapse; overflow:hidden; border-radius:12px}
+    .table th, .table td{padding:12px; border-bottom:1px solid var(--border); text-align:left}
+    .table th{color:var(--sub); font-weight:600; background:#0e141e}
+
+    /* footer */
+    footer{margin-top:24px; padding:24px 0; color:var(--sub); border-top:1px solid var(--border)}
+    .hide-mobile{display:block} @media (max-width:640px){ .hide-mobile{display:none} }
+    .muted{color:var(--sub)}
+
+    /* Requested: comparison-table buttons at 90% size */
+    .table .btn{font-size:0.9em; padding:6px 10px}
+    .table .btn.primary{font-size:0.9em; padding:6px 10px}
+
+    /* (Optional) Hide Google banner/frame to keep header from shifting */
+    .goog-te-banner-frame{display:none !important;}
+    body{top:0 !important;}
+    .goog-logo-link, .goog-te-gadget span{display:none !important;}
+    #google_translate_element{height:0; overflow:hidden;} /* keep widget hidden; we drive it via custom select */
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="logo">
+        <span class="logo-badge"></span>
+        <span>Crypto Casino Hub</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#guides">Guides</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#bonuses">Bonuses</a>
+        <a href="#news">News</a>
+        <a href="#compare">Compare</a>
+      </nav>
+      <div class="cta">
+        <!-- Login removed -->
+        <a class="btn primary" id="suggestBtn"
+           href="mailto:kangstar53@gmail.com?subject=Site%20Suggestion">Suggest a Site</a>
+
+        <!-- Custom language select (drives Google Translate) -->
+        <div class="lang">
+          <label class="hide-mobile" for="langSelect">Translate:</label>
+          <select id="langSelect" class="select" aria-label="Language">
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+            <option value="ko">한국어</option>
+            <option value="es">Español</option>
+            <option value="zh-CN">中文</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="panel hero-main">
+          <div class="kicker">Best Crypto Casinos 2025</div>
+          <h1 class="title">Honest reviews, fast payouts, and high RTP — all in one place</h1>
+          <p class="sub">Compare crypto-friendly casinos, slots/live games, bonuses, and KYC policies at a glance. All reviews are independently researched.</p>
+
+          <div class="search">
+            <input class="input" id="q" placeholder="e.g., no kyc, btc bonus, Korean support" />
+            <button class="btn" id="searchBtn">Search</button>
+            <button class="btn" id="clearBtn" title="Clear">Clear</button>
+          </div>
+
+          <div class="pillbar" id="quickTags">
+            <span class="pill" data-tag="btc"># BTC</span>
+            <span class="pill" data-tag="fast payout"># Fast Payout</span>
+            <span class="pill" data-tag="no kyc"># No KYC</span>
+            <span class="pill" data-tag="korean"># Korean</span>
+          </div>
+
+          <div class="score">
+            <div class="stars" aria-label="Average 4.7/5">
+              <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.1 6.5 7.1 1-5.2 5 1.3 7.1L12 18.8 5.7 21.6 7 14.5 1.8 9.5 8.9 8.5z"/></svg>
+              <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.1 6.5 7.1 1-5.2 5 1.3 7.1L12 18.8 5.7 21.6 7 14.5 1.8 9.5 8.9 8.5z"/></svg>
+              <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.1 6.5 7.1 1-5.2 5 1.3 7.1L12 18.8 5.7 21.6 7 14.5 1.8 9.5 8.9 8.5z"/></svg>
+              <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.1 6.5 7.1 1-5.2 5 1.3 7.1L12 18.8 5.7 21.6 7 14.5 1.8 9.5 8.9 8.5z"/></svg>
+              <svg class="star" viewBox="0 0 24 24" style="opacity:.5"><path d="M12 2l3.1 6.5 7.1 1-5.2 5 1.3 7.1L12 18.8 5.7 21.6 7 14.5 1.8 9.5 8.9 8.5z"/></svg>
+            </div>
+            <div class="sub">Transparent ad disclosures & review standards</div>
+          </div>
+        </div>
+
+        <div class="panel hero-side">
+          <div class="side-item">
+            <div style="width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,#15324a,#142233)"></div>
+            <div>
+              <div class="tag">Hot</div>
+              <div style="font-weight:600;margin-top:6px">New: 200% match + 100FS</div>
+              <div class="meta">Up to 1 BTC · 35x wagering</div>
+            </div>
+          </div>
+          <div class="side-item">
+            <div style="width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,#1a3640,#0e2130)"></div>
+            <div>
+              <div class="tag" style="background:var(--primary)">Guide</div>
+              <div style="font-weight:600;margin-top:6px">Are no-KYC casinos safe?</div>
+              <div class="meta">Security · AML · Anonymity</div>
+            </div>
+          </div>
+          <div class="side-item">
+            <div style="width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,#19283c,#0a1a2a)"></div>
+            <div>
+              <div class="tag" style="background:var(--warn)">Caution</div>
+              <div style="font-weight:600;margin-top:6px">Delayed payout blacklist</div>
+              <div class="meta">Recent complaints</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top Reviews -->
+    <section id="reviews">
+      <div class="section-head">
+        <h2>Top 6 Recommended Casinos</h2>
+        <div class="muted">Search applies to both cards and the comparison table.</div>
+      </div>
+
+      <div class="grid cols-3" id="cards">
+        <!-- Card 1 -->
+        <article class="card" data-tags="saturnbet btc fast payout no kyc korean">
+          <a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener" class="thumb-link">
+            <div class="thumb"><img src="SaturnBet.jpg" alt="SaturnBet"></div>
+          </a>
+          <div class="body">
+            <span class="badge">Editor's Pick</span>
+            <h3 style="margin:10px 0 6px"><a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener">SaturnBet</a></h3>
+            <div class="meta">BTC·ETH·USDT | Slots · Live · Sports</div>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="card" data-tags="orbitplay btc only no kyc instant">
+          <a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener" class="thumb-link">
+            <div class="thumb"><img src="OrbitPlay.jpg" alt="OrbitPlay"></div>
+          </a>
+          <div class="body">
+            <span class="badge" style="background:var(--accent)">High RTP</span>
+            <h3 style="margin:10px 0 6px"><a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener">OrbitPlay</a></h3>
+            <div class="meta">No KYC | BTC Only</div>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="card" data-tags="nebula eth usdt new">
+          <a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener" class="thumb-link">
+            <div class="thumb"><img src="NebulaWin.jpg" alt="NebulaWin"></div>
+          </a>
+          <div class="body">
+            <span class="badge">New</span>
+            <h3 style="margin:10px 0 6px"><a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener">NebulaWin</a></h3>
+            <div class="meta">ETH · USDT</div>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="card" data-tags="luna bonus big 2btc">
+          <a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener" class="thumb-link">
+            <div class="thumb"><img src="LunaLuck.jpg" alt="LunaLuck"></div>
+          </a>
+          <div class="body">
+            <span class="badge">Big Bonus</span>
+            <h3 style="margin:10px 0 6px"><a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener">LunaLuck</a></h3>
+            <div class="meta">Up to 2 BTC</div>
+          </div>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="card" data-tags="cosmo mobile app">
+          <a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener" class="thumb-link">
+            <div class="thumb"><img src="CosmoSpin.jpg" alt="CosmoSpin"></div>
+          </a>
+          <div class="body">
+            <span class="badge">Mobile Optimized</span>
+            <h3 style="margin:10px 0 6px"><a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener">CosmoSpin</a></h3>
+            <div class="meta">App Available</div>
+          </div>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="card" data-tags="vega verified live">
+          <a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener" class="thumb-link">
+            <div class="thumb"><img src="VegaRoll.jpg" alt="VegaRoll"></div>
+          </a>
+          <div class="body">
+            <span class="badge">Verified</span>
+            <h3 style="margin:10px 0 6px"><a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener">VegaRoll</a></h3>
+            <div class="meta">Strong in Live</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section id="compare">
+      <div class="section-head">
+        <h2>Quick Compare</h2>
+        <div>
+          <label class="muted" for="sortSelect">Sort:</label>
+          <select id="sortSelect" class="input" style="width:auto; padding:8px 10px">
+            <option value="">Default</option>
+            <option value="rating-desc">Highest Rating</option>
+            <option value="withdraw-asc">Fastest Payout</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="panel" style="overflow:auto">
+        <table class="table" id="compareTable">
+          <thead>
+            <tr>
+              <th>Site</th><th>Crypto</th><th>Max Bonus</th><th>KYC</th><th>Payout Speed</th><th>Rating</th><th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-tags="saturnbet btc eth usdt optional kyc 10min fast" data-withdraw-min="10" data-rating="4.7">
+              <td>SaturnBet</td><td>BTC, ETH, USDT</td><td>200% + 100FS</td><td>Optional</td><td>~10 min</td><td>4.7/5</td>
+              <td><a class="btn" href="#" >Visit Site</a></td>
+            </tr>
+            <tr data-tags="orbitplay btc no kyc instant" data-withdraw-min="0" data-rating="4.5">
+              <td>OrbitPlay</td><td>BTC</td><td>1 BTC</td><td>None</td><td>Instant</td><td>4.5/5</td>
+              <td><a class="btn" href="#" >Visit Site</a></td>
+            </tr>
+            <tr data-tags="nebula eth ltc 24h kyc required" data-withdraw-min="1440" data-rating="4.1">
+              <td>NebulaWin</td><td>ETH, LTC</td><td>150%</td><td>Required</td><td>~24 h</td><td>4.1/5</td>
+              <td><a class="btn" href="#" >Visit Site</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Latest Articles -->
+    <section id="news">
+      <div class="section-head">
+        <h2>Latest Guides & News</h2>
+        <a class="btn" href="#">See more</a>
+      </div>
+      <div class="grid cols-4">
+        <article class="card" data-tags="guide bonus match free spins wagering">
+          <div class="thumb"></div>
+          <div class="body">
+            <div class="meta">Guide · Aug 12</div>
+            <h3 style="margin:8px 0">Understanding crypto bonuses</h3>
+            <p class="sub">Match bonus, free spins, wagering terms.</p>
+          </div>
+        </article>
+        <article class="card" data-tags="news slot studio rtp volatility">
+          <div class="thumb"></div>
+          <div class="body">
+            <div class="meta">News · Aug 10</div>
+            <h3 style="margin:8px 0">New release from a major slot studio</h3>
+            <p class="sub">RTP/volatility preview.</p>
+          </div>
+        </article>
+        <article class="card" data-tags="review saturnbet kyc payout bonus experience">
+          <div class="thumb"></div>
+          <div class="body">
+            <div class="meta">Review · Aug 8</div>
+            <h3 style="margin:8px 0">SaturnBet deep dive</h3>
+            <p class="sub">KYC, payouts, and bonus experience.</p>
+          </div>
+        </article>
+        <article class="card" data-tags="insight provider rtp compare data">
+          <div class="thumb"></div>
+          <div class="body">
+            <div class="meta">Insight · Aug 5</div>
+            <h3 style="margin:8px 0">RTP comparison by provider</h3>
+            <p class="sub">Based on measured data.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex; gap:16px; flex-wrap:wrap; justify-content:space-between; align-items:center">
+      <div>© 2025 Crypto Casino Hub. For informational purposes only; some links may be affiliate.</div>
+      <div class="taglist">
+        <span class="tag">Ad disclosure</span><span class="tag">Accountability</span><span class="tag">Gambling help</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Hidden Google Translate widget container -->
+  <div id="google_translate_element"></div>
+
+  <script>
+  (function(){
+    // ====== Search / Filter / Sort ======
+    const input = document.getElementById('q');
+    const btn   = document.getElementById('searchBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const pills = document.getElementById('quickTags');
+    const sortSelect = document.getElementById('sortSelect');
+    const table = document.getElementById('compareTable');
+
+    let timer = null;
+    input.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(applyFilter, 120); });
+    btn.addEventListener('click', (e) => { e.preventDefault(); applyFilter(); });
+    input.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ e.preventDefault(); applyFilter(); } });
+    clearBtn.addEventListener('click', ()=>{ input.value=''; updateURL(''); applyFilter(); input.focus(); });
+    pills.addEventListener('click', (e)=>{
+      const el = e.target.closest('[data-tag]');
+      if(!el) return;
+      const t = el.getAttribute('data-tag');
+      const now = input.value.trim();
+      input.value = now ? (now + ' ' + t) : t;
+      applyFilter();
+    });
+
+    const urlQ = new URLSearchParams(location.search).get('q');
+    if(urlQ){ input.value = urlQ; }
+
+    sortSelect.addEventListener('change', ()=>{ sortTable(sortSelect.value); });
+    applyFilter();
+
+    function applyFilter(){
+      const raw = input.value;
+      updateURL(raw);
+      const q = normalize(raw);
+      if(!q){ showAll(); return; }
+      const tokens = q.split(/\s+/).filter(Boolean);
+
+      document.querySelectorAll('.grid .card').forEach(card => {
+        const hay = normalize(card.innerText + ' ' + (card.dataset.tags || ''));
+        const ok = tokens.every(t => hay.includes(t));
+        card.style.display = ok ? '' : 'none';
+      });
+
+      table.querySelectorAll('tbody tr').forEach(tr => {
+        const hay = normalize(tr.innerText + ' ' + (tr.dataset.tags || ''));
+        const ok = tokens.every(t => hay.includes(t));
+        tr.style.display = ok ? '' : 'none';
+      });
+    }
+    function showAll(){ document.querySelectorAll('.grid .card, table.table tbody tr').forEach(el => el.style.display = ''); }
+    function normalize(str){ return (str || '').toLowerCase().replace(/\s+/g, ' ').trim(); }
+    function updateURL(q){
+      const sp = new URLSearchParams(location.search);
+      if(q && q.trim()) sp.set('q', q.trim()); else sp.delete('q');
+      const newUrl = location.pathname + (sp.toString() ? ('?' + sp.toString()) : '');
+      history.replaceState({}, '', newUrl);
+    }
+    function sortTable(mode){
+      const tbody = table.querySelector('tbody');
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      let getKey;
+      if(mode === 'rating-desc'){ getKey = r => parseFloat(r.dataset.rating || '0') * -1; }
+      else if(mode === 'withdraw-asc'){ getKey = r => parseFloat(r.dataset.withdrawMin || r.dataset.withdrawmin || '999999'); }
+      else { rows.forEach(r => tbody.appendChild(r)); return; }
+      rows.sort((a,b)=> getKey(a) - getKey(b)).forEach(r => tbody.appendChild(r));
+    }
+
+    // ====== Google Translate Integration ======
+    // We keep the official widget hidden, and control it via our custom <select>.
+    const supported = ['en','ja','ko','es','zh-CN'];
+    const langSelect = document.getElementById('langSelect');
+
+    // Resolve initial language from browser; fallback to English
+    function detectBrowserLang(){
+      const raw = (navigator.language || (Intl.DateTimeFormat().resolvedOptions().locale) || 'en').toLowerCase();
+      // Normalize to our supported codes
+      if (raw.startsWith('ja')) return 'ja';
+      if (raw.startsWith('ko')) return 'ko';
+      if (raw.startsWith('es')) return 'es';
+      if (raw.startsWith('zh')) return 'zh-CN';
+      return 'en';
+    }
+
+    // Programmatically set Google combo when available
+    function setGoogleTranslateLang(code){
+      const combo = document.querySelector('select.goog-te-combo');
+      if(!combo) return false;
+      // Google uses: en, ja, ko, es, zh-CN
+      combo.value = code;
+      combo.dispatchEvent(new Event('change'));
+      return true;
+    }
+
+    // Wait until Google injects the combo:
+    function whenGComboReady(cb, tries=60){
+      const combo = document.querySelector('select.goog-te-combo');
+      if(combo) return cb(combo);
+      if(tries <= 0) return;
+      setTimeout(()=> whenGComboReady(cb, tries-1), 250);
+    }
+
+    // Custom select -> drive Google combo
+    langSelect.addEventListener('change', ()=>{
+      const code = langSelect.value;
+      whenGComboReady(()=> setGoogleTranslateLang(code));
+    });
+
+    // Initial language (browser-based; if not supported -> English)
+    const initial = supported.includes(detectBrowserLang()) ? detectBrowserLang() : 'en';
+    langSelect.value = initial;
+
+    // Once Google loads, apply initial selection
+    window._applyInitialLang = function(){
+      whenGComboReady(()=> setGoogleTranslateLang(initial));
+    };
+
+    // ====== Load Google Translate JS ======
+    window.googleTranslateElementInit = function() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,ja,ko,es,zh-CN',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+
+      // Apply initial language
+      _applyInitialLang();
+    };
+    const s = document.createElement('script');
+    s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    document.head.appendChild(s);
+
+  })();
+  </script>
+</body>
+</html>
