@@ -3,11 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Crypto Casino Hub – Search + i18n (Google Translate)</title>
-  <meta name="description" content="Crypto casino reviews/guides portal – search/filter + Google Translate i18n" />
+  <title>Crypto Casino Hub – Search + Built-in i18n</title>
+  <meta name="description" content="Crypto casino reviews/guides portal – search/filter + built-in multi-language (no external widget)" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
-
   <style>
     :root{
       --bg:#0b0f14; --card:#111723; --muted:#0e141e; --primary:#47c3ff; --accent:#9cff57;
@@ -75,25 +74,21 @@
     .badge{font-size:12px; color:#001018; background:var(--primary); display:inline-block; padding:4px 8px; border-radius:999px; font-weight:700}
     .meta{color:var(--sub); font-size:12px; margin-top:6px}
 
-    /* review table */
+    /* table */
     .table{width:100%; border-collapse:collapse; overflow:hidden; border-radius:12px}
     .table th, .table td{padding:12px; border-bottom:1px solid var(--border); text-align:left}
     .table th{color:var(--sub); font-weight:600; background:#0e141e}
 
     /* footer */
     footer{margin-top:24px; padding:24px 0; color:var(--sub); border-top:1px solid var(--border)}
+
+    /* utilities */
     .hide-mobile{display:block} @media (max-width:640px){ .hide-mobile{display:none} }
     .muted{color:var(--sub)}
 
     /* Requested: comparison-table buttons at 90% size */
     .table .btn{font-size:0.9em; padding:6px 10px}
     .table .btn.primary{font-size:0.9em; padding:6px 10px}
-
-    /* (Optional) Hide Google banner/frame to keep header from shifting */
-    .goog-te-banner-frame{display:none !important;}
-    body{top:0 !important;}
-    .goog-logo-link, .goog-te-gadget span{display:none !important;}
-    #google_translate_element{height:0; overflow:hidden;} /* keep widget hidden; we drive it via custom select */
   </style>
 </head>
 <body>
@@ -101,29 +96,30 @@
     <div class="container nav">
       <div class="logo">
         <span class="logo-badge"></span>
-        <span>Crypto Casino Hub</span>
+        <span data-i18n="brand.name">Crypto Casino Hub</span>
       </div>
       <nav class="nav-links">
-        <a href="#guides">Guides</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#bonuses">Bonuses</a>
-        <a href="#news">News</a>
-        <a href="#compare">Compare</a>
+        <a href="#guides" data-i18n="nav.guides">Guides</a>
+        <a href="#reviews" data-i18n="nav.reviews">Reviews</a>
+        <a href="#bonuses" data-i18n="nav.bonuses">Bonuses</a>
+        <a href="#news" data-i18n="nav.news">News</a>
+        <a href="#compare" data-i18n="nav.compare">Compare</a>
       </nav>
       <div class="cta">
         <!-- Login removed -->
         <a class="btn primary" id="suggestBtn"
-           href="mailto:kangstar53@gmail.com?subject=Site%20Suggestion">Suggest a Site</a>
+           href="mailto:kangstar53@gmail.com?subject=Site%20Suggestion"
+           data-i18n="cta.suggest">Suggest a Site</a>
 
-        <!-- Custom language select (drives Google Translate) -->
+        <!-- Custom language select -->
         <div class="lang">
-          <label class="hide-mobile" for="langSelect">Translate:</label>
+          <label class="hide-mobile" for="langSelect" data-i18n="lang.label">Translate:</label>
           <select id="langSelect" class="select" aria-label="Language">
             <option value="en">English</option>
             <option value="ja">日本語</option>
             <option value="ko">한국어</option>
             <option value="es">Español</option>
-            <option value="zh-CN">中文</option>
+            <option value="zh">中文</option>
           </select>
         </div>
       </div>
@@ -135,21 +131,21 @@
     <section class="hero">
       <div class="hero-grid">
         <div class="panel hero-main">
-          <div class="kicker">Best Crypto Casinos 2025</div>
-          <h1 class="title">Honest reviews, fast payouts, and high RTP — all in one place</h1>
-          <p class="sub">Compare crypto-friendly casinos, slots/live games, bonuses, and KYC policies at a glance. All reviews are independently researched.</p>
+          <div class="kicker" data-i18n="hero.kicker">Best Crypto Casinos 2025</div>
+          <h1 class="title" data-i18n="hero.title">Honest reviews, fast payouts, and high RTP — all in one place</h1>
+          <p class="sub" data-i18n="hero.desc">Compare crypto-friendly casinos, slots/live games, bonuses, and KYC policies at a glance. All reviews are independently researched.</p>
 
           <div class="search">
-            <input class="input" id="q" placeholder="e.g., no kyc, btc bonus, Korean support" />
-            <button class="btn" id="searchBtn">Search</button>
-            <button class="btn" id="clearBtn" title="Clear">Clear</button>
+            <input class="input" id="q" placeholder="e.g., no kyc, btc bonus, Korean support" data-i18n-placeholder="search.placeholder"/>
+            <button class="btn" id="searchBtn" data-i18n="search.search">Search</button>
+            <button class="btn" id="clearBtn" title="Clear" data-i18n="search.clear">Clear</button>
           </div>
 
           <div class="pillbar" id="quickTags">
             <span class="pill" data-tag="btc"># BTC</span>
-            <span class="pill" data-tag="fast payout"># Fast Payout</span>
+            <span class="pill" data-tag="fast payout" data-i18n="tags.fast"># Fast Payout</span>
             <span class="pill" data-tag="no kyc"># No KYC</span>
-            <span class="pill" data-tag="korean"># Korean</span>
+            <span class="pill" data-tag="korean" data-i18n="tags.korean"># Korean</span>
           </div>
 
           <div class="score">
@@ -160,7 +156,7 @@
               <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.1 6.5 7.1 1-5.2 5 1.3 7.1L12 18.8 5.7 21.6 7 14.5 1.8 9.5 8.9 8.5z"/></svg>
               <svg class="star" viewBox="0 0 24 24" style="opacity:.5"><path d="M12 2l3.1 6.5 7.1 1-5.2 5 1.3 7.1L12 18.8 5.7 21.6 7 14.5 1.8 9.5 8.9 8.5z"/></svg>
             </div>
-            <div class="sub">Transparent ad disclosures & review standards</div>
+            <div class="sub" data-i18n="hero.badge">Transparent ad disclosures & review standards</div>
           </div>
         </div>
 
@@ -168,25 +164,25 @@
           <div class="side-item">
             <div style="width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,#15324a,#142233)"></div>
             <div>
-              <div class="tag">Hot</div>
-              <div style="font-weight:600;margin-top:6px">New: 200% match + 100FS</div>
-              <div class="meta">Up to 1 BTC · 35x wagering</div>
+              <div class="tag" data-i18n="side.hot">Hot</div>
+              <div style="font-weight:600;margin-top:6px" data-i18n="side.deal">New: 200% match + 100FS</div>
+              <div class="meta" data-i18n="side.wager">Up to 1 BTC · 35x wagering</div>
             </div>
           </div>
           <div class="side-item">
             <div style="width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,#1a3640,#0e2130)"></div>
             <div>
-              <div class="tag" style="background:var(--primary)">Guide</div>
-              <div style="font-weight:600;margin-top:6px">Are no-KYC casinos safe?</div>
-              <div class="meta">Security · AML · Anonymity</div>
+              <div class="tag" style="background:var(--primary)" data-i18n="side.guide">Guide</div>
+              <div style="font-weight:600;margin-top:6px" data-i18n="side.kyc">Are no-KYC casinos safe?</div>
+              <div class="meta" data-i18n="side.meta">Security · AML · Anonymity</div>
             </div>
           </div>
           <div class="side-item">
             <div style="width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,#19283c,#0a1a2a)"></div>
             <div>
-              <div class="tag" style="background:var(--warn)">Caution</div>
-              <div style="font-weight:600;margin-top:6px">Delayed payout blacklist</div>
-              <div class="meta">Recent complaints</div>
+              <div class="tag" style="background:var(--warn)" data-i18n="side.caution">Caution</div>
+              <div style="font-weight:600;margin-top:6px" data-i18n="side.blacklist">Delayed payout blacklist</div>
+              <div class="meta" data-i18n="side.complaints">Recent complaints</div>
             </div>
           </div>
         </div>
@@ -196,8 +192,8 @@
     <!-- Top Reviews -->
     <section id="reviews">
       <div class="section-head">
-        <h2>Top 6 Recommended Casinos</h2>
-        <div class="muted">Search applies to both cards and the comparison table.</div>
+        <h2 data-i18n="sec.top">Top 6 Recommended Casinos</h2>
+        <div class="muted" data-i18n="sec.note">Search applies to both cards and the comparison table.</div>
       </div>
 
       <div class="grid cols-3" id="cards">
@@ -207,7 +203,7 @@
             <div class="thumb"><img src="SaturnBet.jpg" alt="SaturnBet"></div>
           </a>
           <div class="body">
-            <span class="badge">Editor's Pick</span>
+            <span class="badge" data-i18n="badge.editor">Editor's Pick</span>
             <h3 style="margin:10px 0 6px"><a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener">SaturnBet</a></h3>
             <div class="meta">BTC·ETH·USDT | Slots · Live · Sports</div>
           </div>
@@ -219,7 +215,7 @@
             <div class="thumb"><img src="OrbitPlay.jpg" alt="OrbitPlay"></div>
           </a>
           <div class="body">
-            <span class="badge" style="background:var(--accent)">High RTP</span>
+            <span class="badge" style="background:var(--accent)" data-i18n="badge.rtp">High RTP</span>
             <h3 style="margin:10px 0 6px"><a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener">OrbitPlay</a></h3>
             <div class="meta">No KYC | BTC Only</div>
           </div>
@@ -231,7 +227,7 @@
             <div class="thumb"><img src="NebulaWin.jpg" alt="NebulaWin"></div>
           </a>
           <div class="body">
-            <span class="badge">New</span>
+            <span class="badge" data-i18n="badge.new">New</span>
             <h3 style="margin:10px 0 6px"><a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener">NebulaWin</a></h3>
             <div class="meta">ETH · USDT</div>
           </div>
@@ -243,7 +239,7 @@
             <div class="thumb"><img src="LunaLuck.jpg" alt="LunaLuck"></div>
           </a>
           <div class="body">
-            <span class="badge">Big Bonus</span>
+            <span class="badge" data-i18n="badge.bonus">Big Bonus</span>
             <h3 style="margin:10px 0 6px"><a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener">LunaLuck</a></h3>
             <div class="meta">Up to 2 BTC</div>
           </div>
@@ -255,7 +251,7 @@
             <div class="thumb"><img src="CosmoSpin.jpg" alt="CosmoSpin"></div>
           </a>
           <div class="body">
-            <span class="badge">Mobile Optimized</span>
+            <span class="badge" data-i18n="badge.mobile">Mobile Optimized</span>
             <h3 style="margin:10px 0 6px"><a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener">CosmoSpin</a></h3>
             <div class="meta">App Available</div>
           </div>
@@ -267,7 +263,7 @@
             <div class="thumb"><img src="VegaRoll.jpg" alt="VegaRoll"></div>
           </a>
           <div class="body">
-            <span class="badge">Verified</span>
+            <span class="badge" data-i18n="badge.verified">Verified</span>
             <h3 style="margin:10px 0 6px"><a href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener">VegaRoll</a></h3>
             <div class="meta">Strong in Live</div>
           </div>
@@ -278,13 +274,13 @@
     <!-- Comparison Table -->
     <section id="compare">
       <div class="section-head">
-        <h2>Quick Compare</h2>
+        <h2 data-i18n="sec.compare">Quick Compare</h2>
         <div>
-          <label class="muted" for="sortSelect">Sort:</label>
+          <label class="muted" for="sortSelect" data-i18n="sec.sort">Sort:</label>
           <select id="sortSelect" class="input" style="width:auto; padding:8px 10px">
-            <option value="">Default</option>
-            <option value="rating-desc">Highest Rating</option>
-            <option value="withdraw-asc">Fastest Payout</option>
+            <option value="" data-i18n="sort.default">Default</option>
+            <option value="rating-desc" data-i18n="sort.rating">Highest Rating</option>
+            <option value="withdraw-asc" data-i18n="sort.withdraw">Fastest Payout</option>
           </select>
         </div>
       </div>
@@ -293,21 +289,27 @@
         <table class="table" id="compareTable">
           <thead>
             <tr>
-              <th>Site</th><th>Crypto</th><th>Max Bonus</th><th>KYC</th><th>Payout Speed</th><th>Rating</th><th></th>
+              <th data-i18n="table.site">Site</th>
+              <th data-i18n="table.crypto">Crypto</th>
+              <th data-i18n="table.bonus">Max Bonus</th>
+              <th data-i18n="table.kyc">KYC</th>
+              <th data-i18n="table.payout">Payout Speed</th>
+              <th data-i18n="table.rating">Rating</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             <tr data-tags="saturnbet btc eth usdt optional kyc 10min fast" data-withdraw-min="10" data-rating="4.7">
-              <td>SaturnBet</td><td>BTC, ETH, USDT</td><td>200% + 100FS</td><td>Optional</td><td>~10 min</td><td>4.7/5</td>
-              <td><a class="btn" href="#" >Visit Site</a></td>
+              <td>SaturnBet</td><td>BTC, ETH, USDT</td><td>200% + 100FS</td><td data-i18n="kyc.optional">Optional</td><td>~10 min</td><td>4.7/5</td>
+              <td><a class="btn" href="#" data-i18n="btn.visit">Visit Site</a></td>
             </tr>
             <tr data-tags="orbitplay btc no kyc instant" data-withdraw-min="0" data-rating="4.5">
-              <td>OrbitPlay</td><td>BTC</td><td>1 BTC</td><td>None</td><td>Instant</td><td>4.5/5</td>
-              <td><a class="btn" href="#" >Visit Site</a></td>
+              <td>OrbitPlay</td><td>BTC</td><td>1 BTC</td><td data-i18n="kyc.none">None</td><td data-i18n="payout.instant">Instant</td><td>4.5/5</td>
+              <td><a class="btn" href="#" data-i18n="btn.visit">Visit Site</a></td>
             </tr>
             <tr data-tags="nebula eth ltc 24h kyc required" data-withdraw-min="1440" data-rating="4.1">
-              <td>NebulaWin</td><td>ETH, LTC</td><td>150%</td><td>Required</td><td>~24 h</td><td>4.1/5</td>
-              <td><a class="btn" href="#" >Visit Site</a></td>
+              <td>NebulaWin</td><td>ETH, LTC</td><td>150%</td><td data-i18n="kyc.required">Required</td><td>~24 h</td><td>4.1/5</td>
+              <td><a class="btn" href="#" data-i18n="btn.visit">Visit Site</a></td>
             </tr>
           </tbody>
         </table>
@@ -317,40 +319,40 @@
     <!-- Latest Articles -->
     <section id="news">
       <div class="section-head">
-        <h2>Latest Guides & News</h2>
-        <a class="btn" href="#">See more</a>
+        <h2 data-i18n="sec.latest">Latest Guides & News</h2>
+        <a class="btn" href="#" data-i18n="sec.more">See more</a>
       </div>
       <div class="grid cols-4">
         <article class="card" data-tags="guide bonus match free spins wagering">
           <div class="thumb"></div>
           <div class="body">
             <div class="meta">Guide · Aug 12</div>
-            <h3 style="margin:8px 0">Understanding crypto bonuses</h3>
-            <p class="sub">Match bonus, free spins, wagering terms.</p>
+            <h3 style="margin:8px 0" data-i18n="art.bonus">Understanding crypto bonuses</h3>
+            <p class="sub" data-i18n="art.bonus.desc">Match bonus, free spins, wagering terms.</p>
           </div>
         </article>
         <article class="card" data-tags="news slot studio rtp volatility">
           <div class="thumb"></div>
           <div class="body">
             <div class="meta">News · Aug 10</div>
-            <h3 style="margin:8px 0">New release from a major slot studio</h3>
-            <p class="sub">RTP/volatility preview.</p>
+            <h3 style="margin:8px 0" data-i18n="art.slot">New release from a major slot studio</h3>
+            <p class="sub" data-i18n="art.slot.desc">RTP/volatility preview.</p>
           </div>
         </article>
         <article class="card" data-tags="review saturnbet kyc payout bonus experience">
           <div class="thumb"></div>
           <div class="body">
             <div class="meta">Review · Aug 8</div>
-            <h3 style="margin:8px 0">SaturnBet deep dive</h3>
-            <p class="sub">KYC, payouts, and bonus experience.</p>
+            <h3 style="margin:8px 0" data-i18n="art.review">SaturnBet deep dive</h3>
+            <p class="sub" data-i18n="art.review.desc">KYC, payouts, and bonus experience.</p>
           </div>
         </article>
         <article class="card" data-tags="insight provider rtp compare data">
           <div class="thumb"></div>
           <div class="body">
             <div class="meta">Insight · Aug 5</div>
-            <h3 style="margin:8px 0">RTP comparison by provider</h3>
-            <p class="sub">Based on measured data.</p>
+            <h3 style="margin:8px 0" data-i18n="art.rtp">RTP comparison by provider</h3>
+            <p class="sub" data-i18n="art.rtp.desc">Based on measured data.</p>
           </div>
         </article>
       </div>
@@ -359,18 +361,131 @@
 
   <footer>
     <div class="container" style="display:flex; gap:16px; flex-wrap:wrap; justify-content:space-between; align-items:center">
-      <div>© 2025 Crypto Casino Hub. For informational purposes only; some links may be affiliate.</div>
+      <div data-i18n="foot.copy">© 2025 Crypto Casino Hub. For informational purposes only; some links may be affiliate.</div>
       <div class="taglist">
-        <span class="tag">Ad disclosure</span><span class="tag">Accountability</span><span class="tag">Gambling help</span>
+        <span class="tag" data-i18n="foot.disclosure">Ad disclosure</span>
+        <span class="tag" data-i18n="foot.accountability">Accountability</span>
+        <span class="tag" data-i18n="foot.help">Gambling help</span>
       </div>
     </div>
   </footer>
 
-  <!-- Hidden Google Translate widget container -->
-  <div id="google_translate_element"></div>
-
   <script>
   (function(){
+    // ===== I18N dictionaries (en is the default text already in DOM) =====
+    const I18N = {
+      en: {
+        'brand.name':'Crypto Casino Hub',
+        'nav.guides':'Guides','nav.reviews':'Reviews','nav.bonuses':'Bonuses','nav.news':'News','nav.compare':'Compare',
+        'cta.suggest':'Suggest a Site','lang.label':'Translate:',
+        'hero.kicker':'Best Crypto Casinos 2025','hero.title':'Honest reviews, fast payouts, and high RTP — all in one place','hero.desc':'Compare crypto-friendly casinos, slots/live games, bonuses, and KYC policies at a glance. All reviews are independently researched.',
+        'search.search':'Search','search.clear':'Clear','search.placeholder':'e.g., no kyc, btc bonus, Korean support',
+        'tags.fast':'# Fast Payout','tags.korean':'# Korean','hero.badge':'Transparent ad disclosures & review standards',
+        'side.hot':'Hot','side.deal':'New: 200% match + 100FS','side.wager':'Up to 1 BTC · 35x wagering','side.guide':'Guide','side.kyc':'Are no-KYC casinos safe?','side.meta':'Security · AML · Anonymity','side.caution':'Caution','side.blacklist':'Delayed payout blacklist','side.complaints':'Recent complaints',
+        'sec.top':'Top 6 Recommended Casinos','sec.note':'Search applies to both cards and the comparison table.',
+        'badge.editor':'Editor\'s Pick','badge.rtp':'High RTP','badge.new':'New','badge.bonus':'Big Bonus','badge.mobile':'Mobile Optimized','badge.verified':'Verified',
+        'sec.compare':'Quick Compare','sec.sort':'Sort:','sort.default':'Default','sort.rating':'Highest Rating','sort.withdraw':'Fastest Payout',
+        'table.site':'Site','table.crypto':'Crypto','table.bonus':'Max Bonus','table.kyc':'KYC','table.payout':'Payout Speed','table.rating':'Rating',
+        'kyc.optional':'Optional','kyc.none':'None','kyc.required':'Required','payout.instant':'Instant','btn.visit':'Visit Site',
+        'sec.latest':'Latest Guides & News','sec.more':'See more',
+        'art.bonus':'Understanding crypto bonuses','art.bonus.desc':'Match bonus, free spins, wagering terms.',
+        'art.slot':'New release from a major slot studio','art.slot.desc':'RTP/volatility preview.',
+        'art.review':'SaturnBet deep dive','art.review.desc':'KYC, payouts, and bonus experience.',
+        'art.rtp':'RTP comparison by provider','art.rtp.desc':'Based on measured data.',
+        'foot.copy':'© 2025 Crypto Casino Hub. For informational purposes only; some links may be affiliate.',
+        'foot.disclosure':'Ad disclosure','foot.accountability':'Accountability','foot.help':'Gambling help'
+      },
+      ja: {
+        'brand.name':'Crypto Casino Hub','nav.guides':'ガイド','nav.reviews':'レビュー','nav.bonuses':'ボーナス','nav.news':'ニュース','nav.compare':'比較',
+        'cta.suggest':'サイトを提案','lang.label':'翻訳:',
+        'hero.kicker':'2025年ベスト暗号通貨カジノ','hero.title':'正直なレビュー、迅速な出金、高いRTPを一括比較','hero.desc':'暗号通貨対応カジノ、ゲーム、ボーナス、KYC方針を比較。レビューは独立調査に基づきます。',
+        'search.search':'検索','search.clear':'クリア','search.placeholder':'例: no kyc, btc ボーナス, 日本語対応',
+        'tags.fast':'# 高速出金','tags.korean':'# 韓国語','hero.badge':'広告開示とレビュー基準を透明化',
+        'side.hot':'注目','side.deal':'新規: 200%マッチ + 100FS','side.wager':'最大1 BTC · 35x賭け条件','side.guide':'ガイド','side.kyc':'KYC不要のカジノは安全？','side.meta':'セキュリティ · AML · 匿名性','side.caution':'注意','side.blacklist':'出金遅延ブラックリスト','side.complaints':'最近の苦情',
+        'sec.top':'おすすめカジノ TOP6','sec.note':'検索はカードと比較表の両方に適用されます。',
+        'badge.editor':'編集部おすすめ','badge.rtp':'高RTP','badge.new':'新着','badge.bonus':'大型ボーナス','badge.mobile':'モバイル最適化','badge.verified':'検証済み',
+        'sec.compare':'クイック比較','sec.sort':'並び替え:','sort.default':'デフォルト','sort.rating':'評価が高い順','sort.withdraw':'出金が速い順',
+        'table.site':'サイト','table.crypto':'暗号資産','table.bonus':'最大ボーナス','table.kyc':'KYC','table.payout':'出金速度','table.rating':'評価',
+        'kyc.optional':'任意','kyc.none':'なし','kyc.required':'必須','payout.instant':'即時','btn.visit':'サイトへ',
+        'sec.latest':'最新ガイド & ニュース','sec.more':'もっと見る','art.bonus':'暗号ボーナスの基礎','art.bonus.desc':'マッチ、フリースピン、賭け条件。','art.slot':'大手スタジオの新作','art.slot.desc':'RTP/ボラのプレビュー。','art.review':'SaturnBet 徹底解説','art.review.desc':'KYC/出金/ボーナス体験。','art.rtp':'プロバイダ別RTP比較','art.rtp.desc':'実測データに基づく。','foot.copy':'© 2025 Crypto Casino Hub. 情報提供のみ。アフィリエイトリンクを含む場合があります。','foot.disclosure':'広告開示','foot.accountability':'説明責任','foot.help':'ギャンブル依存対策'
+      },
+      ko: {
+        'brand.name':'Crypto Casino Hub','nav.guides':'가이드','nav.reviews':'리뷰','nav.bonuses':'보너스','nav.news':'뉴스','nav.compare':'비교',
+        'cta.suggest':'사이트 제안하기','lang.label':'번역:',
+        'hero.kicker':'2025 베스트 암호화폐 카지노','hero.title':'정직한 리뷰 · 빠른 출금 · 높은 RTP를 한눈에','hero.desc':'암호화폐 지원 카지노와 게임, 보너스, KYC 정책을 비교하세요. 모든 리뷰는 독립적으로 조사합니다.',
+        'search.search':'검색','search.clear':'지우기','search.placeholder':'예: no kyc, btc 보너스, 한국어 지원',
+        'tags.fast':'# 빠른출금','tags.korean':'# 한국어','hero.badge':'광고 표기 및 리뷰 기준 투명',
+        'side.hot':'핫딜','side.deal':'신규: 200% 매치 + 100FS','side.wager':'최대 1 BTC · 35x 베팅','side.guide':'가이드','side.kyc':'KYC 없는 카지노, 안전할까?','side.meta':'보안 · AML · 익명성','side.caution':'주의','side.blacklist':'지연 출금 블랙리스트','side.complaints':'최근 민원',
+        'sec.top':'추천 카지노 TOP 6','sec.note':'검색은 카드와 비교표에 동시에 적용됩니다.',
+        'badge.editor':'에디터 추천','badge.rtp':'높은 RTP','badge.new':'신규','badge.bonus':'보너스 큼','badge.mobile':'모바일 최적','badge.verified':'검증됨',
+        'sec.compare':'빠른 비교','sec.sort':'정렬:','sort.default':'기본순','sort.rating':'평점 높은순','sort.withdraw':'출금 빠른순',
+        'table.site':'사이트','table.crypto':'암호화폐','table.bonus':'최대 보너스','table.kyc':'KYC','table.payout':'출금속도','table.rating':'평점',
+        'kyc.optional':'선택','kyc.none':'없음','kyc.required':'필요','payout.instant':'즉시','btn.visit':'사이트 방문',
+        'sec.latest':'최신 가이드 & 뉴스','sec.more':'더 보기','art.bonus':'암호화폐 보너스 이해하기','art.bonus.desc':'매치, 프리스핀, 웨이저링.','art.slot':'대형 슬롯 스튜디오 신작','art.slot.desc':'RTP/변동성 미리 보기.','art.review':'SaturnBet 심층 리뷰','art.review.desc':'KYC/출금/보너스 체험담.','art.rtp':'프로바이더별 RTP 비교','art.rtp.desc':'실측 데이터 기반.','foot.copy':'© 2025 Crypto Casino Hub. 정보 제공 목적이며 일부 링크는 제휴일 수 있습니다.','foot.disclosure':'광고 표기','foot.accountability':'책임성','foot.help':'도박중독 도움'
+      },
+      es: {
+        'brand.name':'Crypto Casino Hub','nav.guides':'Guías','nav.reviews':'Reseñas','nav.bonuses':'Bonos','nav.news':'Noticias','nav.compare':'Comparar',
+        'cta.suggest':'Sugerir un sitio','lang.label':'Traducir:',
+        'hero.kicker':'Mejores casinos cripto 2025','hero.title':'Reseñas honestas, pagos rápidos y alto RTP en un solo lugar','hero.desc':'Compara casinos compatibles con cripto, juegos, bonos y políticas KYC. Reseñas investigadas de forma independiente.',
+        'search.search':'Buscar','search.clear':'Limpiar','search.placeholder':'p. ej., no kyc, bono btc, soporte coreano',
+        'tags.fast':'# Pago rápido','tags.korean':'# Coreano','hero.badge':'Transparencia de anuncios y criterios de reseña',
+        'side.hot':'Destacado','side.deal':'Nuevo: 200% + 100FS','side.wager':'Hasta 1 BTC · 35x rollover','side.guide':'Guía','side.kyc':'¿Son seguros los casinos sin KYC?','side.meta':'Seguridad · AML · Anonimato','side.caution':'Precaución','side.blacklist':'Lista de pagos retrasados','side.complaints':'Quejas recientes',
+        'sec.top':'Top 6 casinos recomendados','sec.note':'La búsqueda se aplica a tarjetas y tabla.',
+        'badge.editor':'Selección del editor','badge.rtp':'Alto RTP','badge.new':'Nuevo','badge.bonus':'Gran bono','badge.mobile':'Optimizado para móvil','badge.verified':'Verificado',
+        'sec.compare':'Comparación rápida','sec.sort':'Ordenar:','sort.default':'Predeterminado','sort.rating':'Mayor calificación','sort.withdraw':'Pago más rápido',
+        'table.site':'Sitio','table.crypto':'Cripto','table.bonus':'Bono máx.','table.kyc':'KYC','table.payout':'Velocidad de pago','table.rating':'Calificación',
+        'kyc.optional':'Opcional','kyc.none':'Ninguno','kyc.required':'Requerido','payout.instant':'Instantáneo','btn.visit':'Visitar sitio',
+        'sec.latest':'Últimas guías y noticias','sec.more':'Ver más','art.bonus':'Entender los bonos cripto','art.bonus.desc':'Bono de match, giros gratis y rollover.','art.slot':'Nuevo lanzamiento de gran estudio','art.slot.desc':'Vista previa de RTP/volatilidad.','art.review':'Análisis de SaturnBet','art.review.desc':'KYC, pagos y bonos.','art.rtp':'Comparación de RTP por proveedor','art.rtp.desc':'Basado en datos medidos.','foot.copy':'© 2025 Crypto Casino Hub. Solo con fines informativos; algunos enlaces pueden ser afiliados.','foot.disclosure':'Divulgación de anuncios','foot.accountability':'Responsabilidad','foot.help':'Ayuda contra ludopatía'
+      },
+      zh: {
+        'brand.name':'Crypto Casino Hub','nav.guides':'指南','nav.reviews':'评测','nav.bonuses':'奖金','nav.news':'新闻','nav.compare':'对比',
+        'cta.suggest':'推荐网站','lang.label':'翻译：',
+        'hero.kicker':'2025 年最佳加密赌场','hero.title':'诚实评测、快速提款与高 RTP 一站式查看','hero.desc':'对比支持加密货币的赌场、游戏、奖金和 KYC 政策。所有评测均为独立调研。',
+        'search.search':'搜索','search.clear':'清除','search.placeholder':'例如：no kyc、btc 奖金、韩语支持',
+        'tags.fast':'# 快速提款','tags.korean':'# 韩语','hero.badge':'广告披露与评测标准透明',
+        'side.hot':'热门','side.deal':'新：200% 配比 + 100FS','side.wager':'最高 1 BTC · 35x 打码','side.guide':'指南','side.kyc':'无 KYC 赌场安全吗？','side.meta':'安全 · 反洗钱 · 匿名','side.caution':'注意','side.blacklist':'延迟提款黑名单','side.complaints':'近期投诉',
+        'sec.top':'推荐赌场 TOP 6','sec.note':'搜索同时作用于卡片和对比表。',
+        'badge.editor':'编辑精选','badge.rtp':'高 RTP','badge.new':'新','badge.bonus':'大奖金','badge.mobile':'移动优化','badge.verified':'已验证',
+        'sec.compare':'快速对比','sec.sort':'排序：','sort.default':'默认','sort.rating':'评分最高','sort.withdraw':'提款最快',
+        'table.site':'网站','table.crypto':'加密货币','table.bonus':'最大奖金','table.kyc':'KYC','table.payout':'提款速度','table.rating':'评分',
+        'kyc.optional':'可选','kyc.none':'无','kyc.required':'需要','payout.instant':'即时','btn.visit':'访问网站',
+        'sec.latest':'最新指南与新闻','sec.more':'查看更多','art.bonus':'了解加密奖金','art.bonus.desc':'配比、免费旋转与流水。','art.slot':'大型工作室新作','art.slot.desc':'RTP/波动率预览。','art.review':'SaturnBet 深度评测','art.review.desc':'KYC/提款/奖金体验。','art.rtp':'按供应商对比 RTP','art.rtp.desc':'基于实测数据。','foot.copy':'© 2025 Crypto Casino Hub。仅供信息参考；部分链接可能为联盟链接。','foot.disclosure':'广告披露','foot.accountability':'责任','foot.help':'博彩帮助'
+      }
+    };
+
+    // Apply translations to [data-i18n] textContent and [data-i18n-placeholder] placeholder
+    function applyLang(lang){
+      const dict = I18N[lang] || I18N.en;
+      document.documentElement.lang = (lang in I18N) ? lang : 'en';
+      // text
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) el.textContent = dict[key];
+      });
+      // placeholder
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (dict[key]) el.setAttribute('placeholder', dict[key]);
+      });
+    }
+
+    // Language detect from browser; fallback to en
+    const supported = ['en','ja','ko','es','zh'];
+    function detectBrowserLang(){
+      const raw = (navigator.language || (Intl.DateTimeFormat().resolvedOptions().locale) || 'en').toLowerCase();
+      if (raw.startsWith('ja')) return 'ja';
+      if (raw.startsWith('ko')) return 'ko';
+      if (raw.startsWith('es')) return 'es';
+      if (raw.startsWith('zh')) return 'zh';
+      return 'en';
+    }
+
+    const langSelect = document.getElementById('langSelect');
+    const initial = supported.includes(detectBrowserLang()) ? detectBrowserLang() : 'en';
+    langSelect.value = initial;
+    applyLang(initial);
+    langSelect.addEventListener('change', ()=> applyLang(langSelect.value));
+
     // ====== Search / Filter / Sort ======
     const input = document.getElementById('q');
     const btn   = document.getElementById('searchBtn');
@@ -435,72 +550,6 @@
       else { rows.forEach(r => tbody.appendChild(r)); return; }
       rows.sort((a,b)=> getKey(a) - getKey(b)).forEach(r => tbody.appendChild(r));
     }
-
-    // ====== Google Translate Integration ======
-    // We keep the official widget hidden, and control it via our custom <select>.
-    const supported = ['en','ja','ko','es','zh-CN'];
-    const langSelect = document.getElementById('langSelect');
-
-    // Resolve initial language from browser; fallback to English
-    function detectBrowserLang(){
-      const raw = (navigator.language || (Intl.DateTimeFormat().resolvedOptions().locale) || 'en').toLowerCase();
-      // Normalize to our supported codes
-      if (raw.startsWith('ja')) return 'ja';
-      if (raw.startsWith('ko')) return 'ko';
-      if (raw.startsWith('es')) return 'es';
-      if (raw.startsWith('zh')) return 'zh-CN';
-      return 'en';
-    }
-
-    // Programmatically set Google combo when available
-    function setGoogleTranslateLang(code){
-      const combo = document.querySelector('select.goog-te-combo');
-      if(!combo) return false;
-      // Google uses: en, ja, ko, es, zh-CN
-      combo.value = code;
-      combo.dispatchEvent(new Event('change'));
-      return true;
-    }
-
-    // Wait until Google injects the combo:
-    function whenGComboReady(cb, tries=60){
-      const combo = document.querySelector('select.goog-te-combo');
-      if(combo) return cb(combo);
-      if(tries <= 0) return;
-      setTimeout(()=> whenGComboReady(cb, tries-1), 250);
-    }
-
-    // Custom select -> drive Google combo
-    langSelect.addEventListener('change', ()=>{
-      const code = langSelect.value;
-      whenGComboReady(()=> setGoogleTranslateLang(code));
-    });
-
-    // Initial language (browser-based; if not supported -> English)
-    const initial = supported.includes(detectBrowserLang()) ? detectBrowserLang() : 'en';
-    langSelect.value = initial;
-
-    // Once Google loads, apply initial selection
-    window._applyInitialLang = function(){
-      whenGComboReady(()=> setGoogleTranslateLang(initial));
-    };
-
-    // ====== Load Google Translate JS ======
-    window.googleTranslateElementInit = function() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        includedLanguages: 'en,ja,ko,es,zh-CN',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-        autoDisplay: false
-      }, 'google_translate_element');
-
-      // Apply initial language
-      _applyInitialLang();
-    };
-    const s = document.createElement('script');
-    s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-    document.head.appendChild(s);
-
   })();
   </script>
 </body>
