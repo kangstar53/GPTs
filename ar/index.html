@@ -31,23 +31,43 @@
 <meta name="twitter:title" content="أفضل كازينوهات الكريبتو – مكافآت ومراجعات موثوقة وسحب سريع">
 <meta name="twitter:description" content="مراجعات صادقة، مكافآت، سياسات KYC، وسرعات سحب سريعة.">
 
-<link rel="stylesheet" href="/assets/style.css">
-  <style>
-    body.lang-ar {
-      direction: rtl;
-      text-align: right;
-    }
-    body.lang-ar .nav, 
-    body.lang-ar .cta.lang, 
-    body.lang-ar .section-head, 
-    body.lang-ar p, 
-    body.lang-ar h1, 
-    body.lang-ar h2, 
-    body.lang-ar h3 {
-      direction: rtl;
-      text-align: right;
-    }
-  </style>
+<!-- GitHub Pages(프로젝트 페이지)용 상대경로 -->
+<link rel="stylesheet" href="../assets/style.css">
+
+<!-- Arabic RTL: 텍스트만 RTL, 레이아웃은 LTR 유지 -->
+<style>
+  /* 1) 페이지 전반 텍스트는 RTL */
+  html[lang="ar"] body { direction: rtl; text-align: right; }
+
+  /* 2) 레이아웃 컨테이너/그리드/네비는 LTR로 강제 (원래 배치 유지) */
+  html[lang="ar"] .container,
+  html[lang="ar"] .grid,
+  html[lang="ar"] .nav,
+  html[lang="ar"] .nav-links,
+  html[lang="ar"] .cta.lang,
+  html[lang="ar"] footer .container {
+    direction: ltr;
+    text-align: initial;
+  }
+
+  /* 3) 카드 본문과 주요 텍스트 블록만 다시 RTL 정렬 */
+  html[lang="ar"] .title,
+  html[lang="ar"] .sub,
+  html[lang="ar"] .kicker,
+  html[lang="ar"] .section-head h2,
+  html[lang="ar"] .card .body,
+  html[lang="ar"] .card .meta,
+  html[lang="ar"] .badge {
+    direction: rtl;
+    text-align: right;
+  }
+
+  /* 4) 언어 스위처는 좌→우로 나열(LTR) */
+  html[lang="ar"] .lang { direction: ltr; }
+
+  /* 5) 이미지·썸네일은 영향을 받지 않도록 기본값 유지 */
+  html[lang="ar"] img { direction: ltr; }
+</style>
 
 <!-- JSON-LD -->
 <script type="application/ld+json">
@@ -73,11 +93,6 @@
   "logo":"https://kangstar53.github.io/GPTs/assets/img/logo.png"
 }
 </script>
-<style>
-/* RTL helpers if needed */
-.nav, .cta.lang, .nav-links { direction: rtl; }
-.nav-links a { margin-inline: 0 10px; }
-</style>
 </head>
 <body class="lang-ar">
 <header>
@@ -112,7 +127,7 @@
     <div class="grid cols-3">
       <article class="card">
         <a class="thumb" href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener">
-          <img src="/assets/img/SaturnBet.jpg" alt="SaturnBet">
+          <img src="../assets/img/SaturnBet.jpg" alt="SaturnBet">
         </a>
         <div class="body">
           <span class="badge">اختيار المحرّر</span>
@@ -123,7 +138,7 @@
 
       <article class="card">
         <a class="thumb" href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener">
-          <img src="/assets/img/OrbitPlay.jpg" alt="OrbitPlay">
+          <img src="../assets/img/OrbitPlay.jpg" alt="OrbitPlay">
         </a>
         <div class="body">
           <span class="badge" style="background:var(--accent)">RTP مرتفع</span>
@@ -134,7 +149,7 @@
 
       <article class="card">
         <a class="thumb" href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener">
-          <img src="/assets/img/NebulaWin.jpg" alt="NebulaWin">
+          <img src="../assets/img/NebulaWin.jpg" alt="NebulaWin">
         </a>
         <div class="body">
           <span class="badge">جديد</span>
@@ -145,7 +160,7 @@
 
       <article class="card">
         <a class="thumb" href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener">
-          <img src="/assets/img/LunaLuck.jpg" alt="LunaLuck">
+          <img src="../assets/img/LunaLuck.jpg" alt="LunaLuck">
         </a>
         <div class="body">
           <span class="badge">مكافأة كبيرة</span>
@@ -156,7 +171,7 @@
 
       <article class="card">
         <a class="thumb" href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener">
-          <img src="/assets/img/CosmoSpin.jpg" alt="CosmoSpin">
+          <img src="../assets/img/CosmoSpin.jpg" alt="CosmoSpin">
         </a>
         <div class="body">
           <span class="badge">محسّن للجوال</span>
@@ -167,7 +182,7 @@
 
       <article class="card">
         <a class="thumb" href="https://themewagon.com/theme-price/free/" target="_blank" rel="noopener">
-          <img src="/assets/img/VegaRoll.jpg" alt="VegaRoll">
+          <img src="../assets/img/VegaRoll.jpg" alt="VegaRoll">
         </a>
         <div class="body">
           <span class="badge">موثّق</span>
