@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Redirecting…</title>
+  <meta name="robots" content="noindex,follow">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <div class="container" style="padding:24px">
+    <h1>Redirecting…</h1>
+    <p>If you are not redirected automatically, <a id="fallback" href="https://kangstar53.github.io/GPTs/en/">click here</a>.</p>
+  </div>
+<script>
+(function(){
+  // SEO 안정: 봇/크롤러면 리다이렉트하지 않음
+  if (/bot|crawler|spider|crawling/i.test(navigator.userAgent)) return;
+
+  // 사용자 고정 언어가 있으면 우선
+  const pinned = localStorage.getItem('lang_pinned');
+  if (pinned) return go(pinned);
+
+  // ?lang=ko 식 강제 지정 지원
+  const q = new URLSearchParams(location.search).get('lang');
+  if (q) return go(q);
+
+  // GeoIP → Browser → en
+  detectGeoLang(1500).then(l => go(l || detectBrowserLang() || 'en'))
+    .catch(()=> go(detectBrowserLang() || 'en'));
+
+  function go(lang){
+    lang = norm(lang);
+    const url = `https://kangstar53.github.io/GPTs/${lang}/`;
+    document.getElementById('fallback').href = url;
+    if (location.href !== url) location.replace(url);
+  }
+  function norm(l){
+    l = String(l||'en').toLowerCase();
+    if (l.startsWith('ko')) return 'ko';
+    if (l.startsWith('ja')) return 'ja';
+    if (l.startsWith('fr')) return 'fr';
+    if (l.startsWith('es')) return 'es';
+    if (l.startsWith('zh')) return 'zh';
+    if (l.startsWith('hi')) return 'hi';
+    if (l.startsWith('ar')) return 'ar';
+    return 'en';
+  }
+  async function detectGeoLang(timeoutMs){
+    const ctrl = new AbortController();
+    const t = setTimeout(()=>ctrl.abort(), timeoutMs);
+    try{
+      const r = await fetch('https://ipwho.is/', {signal: ctrl.signal});
+      clearTimeout(t);
+      if(!r.ok) return null;
+      const j = await r.json();
+      if (j && j.success !== false && j.country_code){
+        return mapCC(j.country_code.toUpperCase());
+      }
+      return null;
+    }catch(e){ clearTimeout(t); return null; }
+  }
+  function detectBrowserLang(){
+    const raw = (navigator.language || (Intl.DateTimeFormat().resolvedOptions().locale) || 'en').toLowerCase();
+    return norm(raw);
+  }
+  function mapCC(cc){
+    switch (cc) {
+      case 'KR': return 'ko';
+      case 'JP': return 'ja';
+      case 'CN': case 'HK': case 'MO': case 'TW': return 'zh';
+      case 'IN': return 'hi';
+      case 'FR': case 'BE': case 'CH': case 'CA': case 'LU': case 'MC': case 'SN': case 'CI': case 'CM': return 'fr';
+      case 'ES': case 'MX': case 'AR': case 'CO': case 'CL': case 'PE': case 'VE': case 'UY': case 'PY': case 'BO': case 'EC': case 'GT': case 'CU': case 'DO': case 'HN': case 'NI': case 'SV': case 'CR': case 'PA': case 'GQ': return 'es';
+      case 'SA': case 'AE': case 'EG': case 'QA': case 'KW': case 'OM': case 'BH': case 'JO': case 'PS': case 'IQ': case 'YE': case 'LY': case 'DZ': case 'MA': case 'TN': case 'SD': return 'ar';
+      default: return 'en';
+    }
+  }
+})();
+</script>
+</body>
+</html>
